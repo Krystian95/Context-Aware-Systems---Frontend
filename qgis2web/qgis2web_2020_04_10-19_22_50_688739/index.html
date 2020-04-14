@@ -1,0 +1,4067 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Traiettorie_1.js"></script>
+        <script src="data/Puntidicampionamento_2.js"></script>
+        <script src="data/Traiettorie_3.js"></script>
+        <script src="data/Puntidicampionamento_4.js"></script>
+        <script src="data/Walk_5.js"></script>
+        <script src="data/Car_6.js"></script>
+        <script src="data/Bike_7.js"></script>
+        <script src="data/Walk_8.js"></script>
+        <script src="data/Car_9.js"></script>
+        <script src="data/Bike_10.js"></script>
+        <script src="data/Areacluster_11.js"></script>
+        <script src="data/Centroidi_12.js"></script>
+        <script src="data/Punticlusterizzati_13.js"></script>
+        <script src="data/Punti_14.js"></script>
+        <script src="data/Areacluster_15.js"></script>
+        <script src="data/Punticlusterizzati_16.js"></script>
+        <script src="data/Punti_17.js"></script>
+        <script src="data/Geofenceesistenti_18.js"></script>
+        <script src="data/Areacluster_19.js"></script>
+        <script src="data/Punticlusterizzati_20.js"></script>
+        <script src="data/Punti_21.js"></script>
+        <script src="data/Geofenceesistenti_22.js"></script>
+        <script src="data/Areacluster_23.js"></script>
+        <script src="data/Punticlusterizzati_24.js"></script>
+        <script src="data/Punti_25.js"></script>
+        <script src="data/Geofenceesistenti_26.js"></script>
+        <script src="data/Areacluster_27.js"></script>
+        <script src="data/Punticlusterizzati_28.js"></script>
+        <script src="data/Punti_29.js"></script>
+        <script src="data/Geofenceesistenti_30.js"></script>
+        <script src="data/Areacluster_31.js"></script>
+        <script src="data/Punticlusterizzati_32.js"></script>
+        <script src="data/Punti_33.js"></script>
+        <script src="data/Geofenceesistenti_34.js"></script>
+        <script src="data/Areacluster_35.js"></script>
+        <script src="data/Punticlusterizzati_36.js"></script>
+        <script src="data/Punti_37.js"></script>
+        <script src="data/Geofenceesistenti_38.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[44.490312796211725,11.324054375630684],[44.50780910848187,11.35573326927353]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_OpenStreetMap_0 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        function pop_Traiettorie_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Traiettorie_1_0(feature) {
+            switch(String(feature.properties['activity'])) {
+                case 'bike':
+                    return {
+                pane: 'pane_Traiettorie_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'car':
+                    return {
+                pane: 'pane_Traiettorie_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'walk':
+                    return {
+                pane: 'pane_Traiettorie_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Traiettorie_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        function style_Traiettorie_1_1(feature) {
+            switch(String(feature.properties['activity'])) {
+                case 'bike':
+                    return {
+                pane: 'pane_Traiettorie_1',
+                opacity: 1,
+                color: 'rgba(64,136,255,0.7254901960784313)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'car':
+                    return {
+                pane: 'pane_Traiettorie_1',
+                opacity: 1,
+                color: 'rgba(228,48,48,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'walk':
+                    return {
+                pane: 'pane_Traiettorie_1',
+                opacity: 1,
+                color: 'rgba(45,245,19,0.7372549019607844)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Traiettorie_1',
+                opacity: 1,
+                color: 'rgba(99,162,229,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Traiettorie_1');
+        map.getPane('pane_Traiettorie_1').style.zIndex = 401;
+        map.getPane('pane_Traiettorie_1').style['mix-blend-mode'] = 'normal';
+        var layer_Traiettorie_1 = new L.geoJson.multiStyle(json_Traiettorie_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Traiettorie_1',
+            layerName: 'layer_Traiettorie_1',
+            pane: 'pane_Traiettorie_1',
+            onEachFeature: pop_Traiettorie_1,
+            styles: [style_Traiettorie_1_0,style_Traiettorie_1_1,]
+        });
+        bounds_group.addLayer(layer_Traiettorie_1);
+        map.addLayer(layer_Traiettorie_1);
+        function pop_Puntidicampionamento_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Puntidicampionamento_2_0(feature) {
+            switch(String(feature.properties['activity'])) {
+                case 'bike':
+                    return {
+                pane: 'pane_Puntidicampionamento_2',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(27,31,235,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'car':
+                    return {
+                pane: 'pane_Puntidicampionamento_2',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,116,118,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'walk':
+                    return {
+                pane: 'pane_Puntidicampionamento_2',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(62,213,60,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Puntidicampionamento_2');
+        map.getPane('pane_Puntidicampionamento_2').style.zIndex = 402;
+        map.getPane('pane_Puntidicampionamento_2').style['mix-blend-mode'] = 'normal';
+        var layer_Puntidicampionamento_2 = new L.geoJson(json_Puntidicampionamento_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Puntidicampionamento_2',
+            layerName: 'layer_Puntidicampionamento_2',
+            pane: 'pane_Puntidicampionamento_2',
+            onEachFeature: pop_Puntidicampionamento_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Puntidicampionamento_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Puntidicampionamento_2);
+        map.addLayer(layer_Puntidicampionamento_2);
+        function pop_Traiettorie_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Traiettorie_3_0(feature) {
+            switch(String(feature.properties['concat('user: ', user_id, ', activity: ', activity)'])) {
+                case 'user: 10, activity: bike':
+                    return {
+                pane: 'pane_Traiettorie_3',
+                opacity: 1,
+                color: 'rgba(85,211,104,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'user: 10, activity: car':
+                    return {
+                pane: 'pane_Traiettorie_3',
+                opacity: 1,
+                color: 'rgba(103,207,208,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'user: 10, activity: walk':
+                    return {
+                pane: 'pane_Traiettorie_3',
+                opacity: 1,
+                color: 'rgba(200,112,44,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'user: 11, activity: bike':
+                    return {
+                pane: 'pane_Traiettorie_3',
+                opacity: 1,
+                color: 'rgba(33,58,223,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'user: 11, activity: car':
+                    return {
+                pane: 'pane_Traiettorie_3',
+                opacity: 1,
+                color: 'rgba(192,124,218,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'user: 11, activity: walk':
+                    return {
+                pane: 'pane_Traiettorie_3',
+                opacity: 1,
+                color: 'rgba(223,104,156,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Traiettorie_3',
+                opacity: 1,
+                color: 'rgba(164,210,57,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Traiettorie_3');
+        map.getPane('pane_Traiettorie_3').style.zIndex = 403;
+        map.getPane('pane_Traiettorie_3').style['mix-blend-mode'] = 'normal';
+        var layer_Traiettorie_3 = new L.geoJson(json_Traiettorie_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Traiettorie_3',
+            layerName: 'layer_Traiettorie_3',
+            pane: 'pane_Traiettorie_3',
+            onEachFeature: pop_Traiettorie_3,
+            style: style_Traiettorie_3_0,
+        });
+        bounds_group.addLayer(layer_Traiettorie_3);
+        map.addLayer(layer_Traiettorie_3);
+        function pop_Puntidicampionamento_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Puntidicampionamento_4_0(feature) {
+            switch(String(feature.properties['concat('user: ', user_id, ', activity: ', activity)'])) {
+                case 'user: 10, activity: bike':
+                    return {
+                pane: 'pane_Puntidicampionamento_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,45,14,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'user: 10, activity: car':
+                    return {
+                pane: 'pane_Puntidicampionamento_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,200,46,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'user: 10, activity: walk':
+                    return {
+                pane: 'pane_Puntidicampionamento_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(49,127,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'user: 11, activity: bike':
+                    return {
+                pane: 'pane_Puntidicampionamento_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(147,102,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'user: 11, activity: car':
+                    return {
+                pane: 'pane_Puntidicampionamento_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,51,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'user: 11, activity: walk':
+                    return {
+                pane: 'pane_Puntidicampionamento_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(74,229,46,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Puntidicampionamento_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(32,216,161,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Puntidicampionamento_4');
+        map.getPane('pane_Puntidicampionamento_4').style.zIndex = 404;
+        map.getPane('pane_Puntidicampionamento_4').style['mix-blend-mode'] = 'normal';
+        var layer_Puntidicampionamento_4 = new L.geoJson(json_Puntidicampionamento_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Puntidicampionamento_4',
+            layerName: 'layer_Puntidicampionamento_4',
+            pane: 'pane_Puntidicampionamento_4',
+            onEachFeature: pop_Puntidicampionamento_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Puntidicampionamento_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Puntidicampionamento_4);
+        map.addLayer(layer_Puntidicampionamento_4);
+        function pop_Walk_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Walk_5_0() {
+            return {
+                pane: 'pane_Walk_5',
+                opacity: 1,
+                color: 'rgba(77,175,74,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Walk_5');
+        map.getPane('pane_Walk_5').style.zIndex = 405;
+        map.getPane('pane_Walk_5').style['mix-blend-mode'] = 'normal';
+        var layer_Walk_5 = new L.geoJson(json_Walk_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Walk_5',
+            layerName: 'layer_Walk_5',
+            pane: 'pane_Walk_5',
+            onEachFeature: pop_Walk_5,
+            style: style_Walk_5_0,
+        });
+        bounds_group.addLayer(layer_Walk_5);
+        map.addLayer(layer_Walk_5);
+        function pop_Car_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Car_6_0() {
+            return {
+                pane: 'pane_Car_6',
+                opacity: 1,
+                color: 'rgba(228,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Car_6');
+        map.getPane('pane_Car_6').style.zIndex = 406;
+        map.getPane('pane_Car_6').style['mix-blend-mode'] = 'normal';
+        var layer_Car_6 = new L.geoJson(json_Car_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Car_6',
+            layerName: 'layer_Car_6',
+            pane: 'pane_Car_6',
+            onEachFeature: pop_Car_6,
+            style: style_Car_6_0,
+        });
+        bounds_group.addLayer(layer_Car_6);
+        map.addLayer(layer_Car_6);
+        function pop_Bike_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Bike_7_0() {
+            return {
+                pane: 'pane_Bike_7',
+                opacity: 1,
+                color: 'rgba(53,121,177,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Bike_7');
+        map.getPane('pane_Bike_7').style.zIndex = 407;
+        map.getPane('pane_Bike_7').style['mix-blend-mode'] = 'normal';
+        var layer_Bike_7 = new L.geoJson(json_Bike_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Bike_7',
+            layerName: 'layer_Bike_7',
+            pane: 'pane_Bike_7',
+            onEachFeature: pop_Bike_7,
+            style: style_Bike_7_0,
+        });
+        bounds_group.addLayer(layer_Bike_7);
+        map.addLayer(layer_Bike_7);
+        function pop_Walk_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+        function style_Walk_8_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Walk_8rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Walk_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,255,229,0.6)',
+                interactive: true,
+            };
+                }
+                else if (exp_Walk_8rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Walk_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,255,204,0.6431372549019608)',
+                interactive: true,
+            };
+                }
+                else if (exp_Walk_8rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Walk_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(186,255,178,0.6901960784313725)',
+                interactive: true,
+            };
+                }
+                else if (exp_Walk_8rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_Walk_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(163,255,153,0.7333333333333333)',
+                interactive: true,
+            };
+                }
+                else if (exp_Walk_8rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_Walk_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(140,255,127,0.7803921568627451)',
+                interactive: true,
+            };
+                }
+                else if (exp_Walk_8rule5_eval_expression(context)) {
+                  return {
+                pane: 'pane_Walk_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(117,255,102,0.8235294117647058)',
+                interactive: true,
+            };
+                }
+                else if (exp_Walk_8rule6_eval_expression(context)) {
+                  return {
+                pane: 'pane_Walk_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(94,255,76,0.8666666666666667)',
+                interactive: true,
+            };
+                }
+                else if (exp_Walk_8rule7_eval_expression(context)) {
+                  return {
+                pane: 'pane_Walk_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(71,255,51,0.9137254901960784)',
+                interactive: true,
+            };
+                }
+                else if (exp_Walk_8rule8_eval_expression(context)) {
+                  return {
+                pane: 'pane_Walk_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(48,255,25,0.9568627450980393)',
+                interactive: true,
+            };
+                }
+                else if (exp_Walk_8rule9_eval_expression(context)) {
+                  return {
+                pane: 'pane_Walk_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,255,0,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Walk_8');
+        map.getPane('pane_Walk_8').style.zIndex = 408;
+        map.getPane('pane_Walk_8').style['mix-blend-mode'] = 'normal';
+        var layer_Walk_8 = new L.geoJson(json_Walk_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Walk_8',
+            layerName: 'layer_Walk_8',
+            pane: 'pane_Walk_8',
+            onEachFeature: pop_Walk_8,
+            style: style_Walk_8_0,
+        });
+        bounds_group.addLayer(layer_Walk_8);
+        map.addLayer(layer_Walk_8);
+        function pop_Car_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+        function style_Car_9_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Car_9rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Car_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,230,230,0.6)',
+                interactive: true,
+            };
+                }
+                else if (exp_Car_9rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Car_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,205,205,0.6431372549019608)',
+                interactive: true,
+            };
+                }
+                else if (exp_Car_9rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Car_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,179,179,0.6901960784313725)',
+                interactive: true,
+            };
+                }
+                else if (exp_Car_9rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_Car_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,153,153,0.7333333333333333)',
+                interactive: true,
+            };
+                }
+                else if (exp_Car_9rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_Car_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,128,128,0.7803921568627451)',
+                interactive: true,
+            };
+                }
+                else if (exp_Car_9rule5_eval_expression(context)) {
+                  return {
+                pane: 'pane_Car_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,102,102,0.8235294117647058)',
+                interactive: true,
+            };
+                }
+                else if (exp_Car_9rule6_eval_expression(context)) {
+                  return {
+                pane: 'pane_Car_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,76,76,0.8666666666666667)',
+                interactive: true,
+            };
+                }
+                else if (exp_Car_9rule7_eval_expression(context)) {
+                  return {
+                pane: 'pane_Car_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,51,51,0.9137254901960784)',
+                interactive: true,
+            };
+                }
+                else if (exp_Car_9rule8_eval_expression(context)) {
+                  return {
+                pane: 'pane_Car_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,25,25,0.9568627450980393)',
+                interactive: true,
+            };
+                }
+                else if (exp_Car_9rule9_eval_expression(context)) {
+                  return {
+                pane: 'pane_Car_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,0,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Car_9');
+        map.getPane('pane_Car_9').style.zIndex = 409;
+        map.getPane('pane_Car_9').style['mix-blend-mode'] = 'normal';
+        var layer_Car_9 = new L.geoJson(json_Car_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Car_9',
+            layerName: 'layer_Car_9',
+            pane: 'pane_Car_9',
+            onEachFeature: pop_Car_9,
+            style: style_Car_9_0,
+        });
+        bounds_group.addLayer(layer_Car_9);
+        map.addLayer(layer_Car_9);
+        function pop_Bike_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+        function style_Bike_10_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Bike_10rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Bike_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(242,240,255,0.6039215686274509)',
+                interactive: true,
+            };
+                }
+                else if (exp_Bike_10rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Bike_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,214,255,0.6470588235294118)',
+                interactive: true,
+            };
+                }
+                else if (exp_Bike_10rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Bike_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(194,187,255,0.6941176470588235)',
+                interactive: true,
+            };
+                }
+                else if (exp_Bike_10rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_Bike_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,160,255,0.7372549019607844)',
+                interactive: true,
+            };
+                }
+                else if (exp_Bike_10rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_Bike_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(146,133,255,0.7803921568627451)',
+                interactive: true,
+            };
+                }
+                else if (exp_Bike_10rule5_eval_expression(context)) {
+                  return {
+                pane: 'pane_Bike_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(121,107,255,0.8235294117647058)',
+                interactive: true,
+            };
+                }
+                else if (exp_Bike_10rule6_eval_expression(context)) {
+                  return {
+                pane: 'pane_Bike_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,80,255,0.8705882352941177)',
+                interactive: true,
+            };
+                }
+                else if (exp_Bike_10rule7_eval_expression(context)) {
+                  return {
+                pane: 'pane_Bike_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(73,53,255,0.9137254901960784)',
+                interactive: true,
+            };
+                }
+                else if (exp_Bike_10rule8_eval_expression(context)) {
+                  return {
+                pane: 'pane_Bike_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(49,26,255,0.9568627450980393)',
+                interactive: true,
+            };
+                }
+                else if (exp_Bike_10rule9_eval_expression(context)) {
+                  return {
+                pane: 'pane_Bike_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,0,255,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Bike_10');
+        map.getPane('pane_Bike_10').style.zIndex = 410;
+        map.getPane('pane_Bike_10').style['mix-blend-mode'] = 'normal';
+        var layer_Bike_10 = new L.geoJson(json_Bike_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Bike_10',
+            layerName: 'layer_Bike_10',
+            pane: 'pane_Bike_10',
+            onEachFeature: pop_Bike_10,
+            style: style_Bike_10_0,
+        });
+        bounds_group.addLayer(layer_Bike_10);
+        map.addLayer(layer_Bike_10);
+        function pop_Areacluster_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#c68443',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#379d74',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#960fe3',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#ffe900',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#b60000',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#0000ff',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#20d4e4',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#c68443',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#379d74',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#960fe3',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#ffe900',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#b60000',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#0000ff',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        var pattern_Areacluster_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#20d4e4',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_Areacluster_11_0.addTo(map);
+        function style_Areacluster_11_0(feature) {
+            switch(String(feature.properties['centroid'])) {
+                case '0':
+                    return {
+                pane: 'pane_Areacluster_11',
+                stroke: false,
+                fillOpacity: 1,
+                fillPattern: pattern_Areacluster_11_0,
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Areacluster_11',
+                stroke: false,
+                fillOpacity: 1,
+                fillPattern: pattern_Areacluster_11_0,
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Areacluster_11',
+                stroke: false,
+                fillOpacity: 1,
+                fillPattern: pattern_Areacluster_11_0,
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Areacluster_11',
+                stroke: false,
+                fillOpacity: 1,
+                fillPattern: pattern_Areacluster_11_0,
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Areacluster_11',
+                stroke: false,
+                fillOpacity: 1,
+                fillPattern: pattern_Areacluster_11_0,
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Areacluster_11',
+                stroke: false,
+                fillOpacity: 1,
+                fillPattern: pattern_Areacluster_11_0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Areacluster_11',
+                stroke: false,
+                fillOpacity: 1,
+                fillPattern: pattern_Areacluster_11_0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        function style_Areacluster_11_1(feature) {
+            switch(String(feature.properties['centroid'])) {
+                case '0':
+                    return {
+                pane: 'pane_Areacluster_11',
+                opacity: 1,
+                color: 'rgba(198,132,67,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Areacluster_11',
+                opacity: 1,
+                color: 'rgba(55,157,116,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Areacluster_11',
+                opacity: 1,
+                color: 'rgba(150,15,227,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Areacluster_11',
+                opacity: 1,
+                color: 'rgba(255,233,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Areacluster_11',
+                opacity: 1,
+                color: 'rgba(182,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Areacluster_11',
+                opacity: 1,
+                color: 'rgba(0,0,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Areacluster_11',
+                opacity: 1,
+                color: 'rgba(32,212,228,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Areacluster_11');
+        map.getPane('pane_Areacluster_11').style.zIndex = 411;
+        map.getPane('pane_Areacluster_11').style['mix-blend-mode'] = 'normal';
+        var layer_Areacluster_11 = new L.geoJson.multiStyle(json_Areacluster_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Areacluster_11',
+            layerName: 'layer_Areacluster_11',
+            pane: 'pane_Areacluster_11',
+            onEachFeature: pop_Areacluster_11,
+            styles: [style_Areacluster_11_0,style_Areacluster_11_1,]
+        });
+        bounds_group.addLayer(layer_Areacluster_11);
+        map.addLayer(layer_Areacluster_11);
+        function pop_Centroidi_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Centroidi_12_0(feature) {
+            switch(String(feature.properties['centroid'])) {
+                case '0':
+                    return {
+                pane: 'pane_Centroidi_12',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,153,93,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Centroidi_12',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(52,183,139,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Centroidi_12',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,97,214,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Centroidi_12',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,205,105,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Centroidi_12',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(233,149,105,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Centroidi_12',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(44,68,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Centroidi_12',
+                radius: 12.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(205,151,62,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Centroidi_12');
+        map.getPane('pane_Centroidi_12').style.zIndex = 412;
+        map.getPane('pane_Centroidi_12').style['mix-blend-mode'] = 'normal';
+        var layer_Centroidi_12 = new L.geoJson(json_Centroidi_12, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Centroidi_12',
+            layerName: 'layer_Centroidi_12',
+            pane: 'pane_Centroidi_12',
+            onEachFeature: pop_Centroidi_12,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Centroidi_12_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Centroidi_12);
+        map.addLayer(layer_Centroidi_12);
+        function pop_Punticlusterizzati_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punticlusterizzati_13_0(feature) {
+            switch(String(feature.properties['cluster_id'])) {
+                case '0':
+                    return {
+                pane: 'pane_Punticlusterizzati_13',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,114,31,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Punticlusterizzati_13',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(15,239,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Punticlusterizzati_13',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Punticlusterizzati_13',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,247,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Punticlusterizzati_13',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Punticlusterizzati_13',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(7,246,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Punticlusterizzati_13',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,112,166,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Punticlusterizzati_13');
+        map.getPane('pane_Punticlusterizzati_13').style.zIndex = 413;
+        map.getPane('pane_Punticlusterizzati_13').style['mix-blend-mode'] = 'normal';
+        var layer_Punticlusterizzati_13 = new L.geoJson(json_Punticlusterizzati_13, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punticlusterizzati_13',
+            layerName: 'layer_Punticlusterizzati_13',
+            pane: 'pane_Punticlusterizzati_13',
+            onEachFeature: pop_Punticlusterizzati_13,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punticlusterizzati_13_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punticlusterizzati_13);
+        map.addLayer(layer_Punticlusterizzati_13);
+        function pop_Punti_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punti_14_0() {
+            return {
+                pane: 'pane_Punti_14',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Punti_14');
+        map.getPane('pane_Punti_14').style.zIndex = 414;
+        map.getPane('pane_Punti_14').style['mix-blend-mode'] = 'normal';
+        var layer_Punti_14 = new L.geoJson(json_Punti_14, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punti_14',
+            layerName: 'layer_Punti_14',
+            pane: 'pane_Punti_14',
+            onEachFeature: pop_Punti_14,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punti_14_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punti_14);
+        map.addLayer(layer_Punti_14);
+        function pop_Areacluster_15(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Areacluster_15_0() {
+            return {
+                pane: 'pane_Areacluster_15',
+                interactive: true,
+            }
+        }
+        function style_Areacluster_15_1() {
+            return {
+                pane: 'pane_Areacluster_15',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Areacluster_15');
+        map.getPane('pane_Areacluster_15').style.zIndex = 415;
+        map.getPane('pane_Areacluster_15').style['mix-blend-mode'] = 'normal';
+        var layer_Areacluster_15 = new L.geoJson.multiStyle(json_Areacluster_15, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Areacluster_15',
+            layerName: 'layer_Areacluster_15',
+            pane: 'pane_Areacluster_15',
+            onEachFeature: pop_Areacluster_15,
+            styles: [style_Areacluster_15_0,style_Areacluster_15_1,]
+        });
+        bounds_group.addLayer(layer_Areacluster_15);
+        map.addLayer(layer_Areacluster_15);
+        function pop_Punticlusterizzati_16(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punticlusterizzati_16_0(feature) {
+            switch(String(feature.properties['cluster_id'])) {
+                case '0':
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,186,125,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(143,229,111,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(132,230,160,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(163,123,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,226,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,69,217,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(44,56,229,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(177,203,59,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,78,61,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(78,171,228,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Punticlusterizzati_16',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(214,61,130,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Punticlusterizzati_16');
+        map.getPane('pane_Punticlusterizzati_16').style.zIndex = 416;
+        map.getPane('pane_Punticlusterizzati_16').style['mix-blend-mode'] = 'normal';
+        var layer_Punticlusterizzati_16 = new L.geoJson(json_Punticlusterizzati_16, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punticlusterizzati_16',
+            layerName: 'layer_Punticlusterizzati_16',
+            pane: 'pane_Punticlusterizzati_16',
+            onEachFeature: pop_Punticlusterizzati_16,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punticlusterizzati_16_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punticlusterizzati_16);
+        map.addLayer(layer_Punticlusterizzati_16);
+        function pop_Punti_17(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punti_17_0() {
+            return {
+                pane: 'pane_Punti_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Punti_17');
+        map.getPane('pane_Punti_17').style.zIndex = 417;
+        map.getPane('pane_Punti_17').style['mix-blend-mode'] = 'normal';
+        var layer_Punti_17 = new L.geoJson(json_Punti_17, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punti_17',
+            layerName: 'layer_Punti_17',
+            pane: 'pane_Punti_17',
+            onEachFeature: pop_Punti_17,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punti_17_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punti_17);
+        map.addLayer(layer_Punti_17);
+        function pop_Geofenceesistenti_18(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Geofenceesistenti_18_0() {
+            return {
+                pane: 'pane_Geofenceesistenti_18',
+                opacity: 1,
+                color: 'rgba(77,175,74,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Geofenceesistenti_18');
+        map.getPane('pane_Geofenceesistenti_18').style.zIndex = 418;
+        map.getPane('pane_Geofenceesistenti_18').style['mix-blend-mode'] = 'normal';
+        var layer_Geofenceesistenti_18 = new L.geoJson(json_Geofenceesistenti_18, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Geofenceesistenti_18',
+            layerName: 'layer_Geofenceesistenti_18',
+            pane: 'pane_Geofenceesistenti_18',
+            onEachFeature: pop_Geofenceesistenti_18,
+            style: style_Geofenceesistenti_18_0,
+        });
+        bounds_group.addLayer(layer_Geofenceesistenti_18);
+        map.addLayer(layer_Geofenceesistenti_18);
+        function pop_Areacluster_19(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Areacluster_19_0() {
+            return {
+                pane: 'pane_Areacluster_19',
+                interactive: true,
+            }
+        }
+        function style_Areacluster_19_1() {
+            return {
+                pane: 'pane_Areacluster_19',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Areacluster_19');
+        map.getPane('pane_Areacluster_19').style.zIndex = 419;
+        map.getPane('pane_Areacluster_19').style['mix-blend-mode'] = 'normal';
+        var layer_Areacluster_19 = new L.geoJson.multiStyle(json_Areacluster_19, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Areacluster_19',
+            layerName: 'layer_Areacluster_19',
+            pane: 'pane_Areacluster_19',
+            onEachFeature: pop_Areacluster_19,
+            styles: [style_Areacluster_19_0,style_Areacluster_19_1,]
+        });
+        bounds_group.addLayer(layer_Areacluster_19);
+        map.addLayer(layer_Areacluster_19);
+        function pop_Punticlusterizzati_20(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punticlusterizzati_20_0(feature) {
+            switch(String(feature.properties['cluster_id'])) {
+                case '0':
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(87,207,22,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,38,135,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(233,94,91,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(108,129,233,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(80,210,178,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(216,228,122,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(201,153,90,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(78,229,108,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(216,35,228,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(119,48,225,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Punticlusterizzati_20',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(37,176,231,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Punticlusterizzati_20');
+        map.getPane('pane_Punticlusterizzati_20').style.zIndex = 420;
+        map.getPane('pane_Punticlusterizzati_20').style['mix-blend-mode'] = 'normal';
+        var layer_Punticlusterizzati_20 = new L.geoJson(json_Punticlusterizzati_20, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punticlusterizzati_20',
+            layerName: 'layer_Punticlusterizzati_20',
+            pane: 'pane_Punticlusterizzati_20',
+            onEachFeature: pop_Punticlusterizzati_20,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punticlusterizzati_20_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punticlusterizzati_20);
+        map.addLayer(layer_Punticlusterizzati_20);
+        function pop_Punti_21(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punti_21_0() {
+            return {
+                pane: 'pane_Punti_21',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Punti_21');
+        map.getPane('pane_Punti_21').style.zIndex = 421;
+        map.getPane('pane_Punti_21').style['mix-blend-mode'] = 'normal';
+        var layer_Punti_21 = new L.geoJson(json_Punti_21, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punti_21',
+            layerName: 'layer_Punti_21',
+            pane: 'pane_Punti_21',
+            onEachFeature: pop_Punti_21,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punti_21_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punti_21);
+        map.addLayer(layer_Punti_21);
+        function pop_Geofenceesistenti_22(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Geofenceesistenti_22_0() {
+            return {
+                pane: 'pane_Geofenceesistenti_22',
+                opacity: 1,
+                color: 'rgba(228,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Geofenceesistenti_22');
+        map.getPane('pane_Geofenceesistenti_22').style.zIndex = 422;
+        map.getPane('pane_Geofenceesistenti_22').style['mix-blend-mode'] = 'normal';
+        var layer_Geofenceesistenti_22 = new L.geoJson(json_Geofenceesistenti_22, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Geofenceesistenti_22',
+            layerName: 'layer_Geofenceesistenti_22',
+            pane: 'pane_Geofenceesistenti_22',
+            onEachFeature: pop_Geofenceesistenti_22,
+            style: style_Geofenceesistenti_22_0,
+        });
+        bounds_group.addLayer(layer_Geofenceesistenti_22);
+        map.addLayer(layer_Geofenceesistenti_22);
+        function pop_Areacluster_23(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Areacluster_23_0() {
+            return {
+                pane: 'pane_Areacluster_23',
+                interactive: true,
+            }
+        }
+        function style_Areacluster_23_1() {
+            return {
+                pane: 'pane_Areacluster_23',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Areacluster_23');
+        map.getPane('pane_Areacluster_23').style.zIndex = 423;
+        map.getPane('pane_Areacluster_23').style['mix-blend-mode'] = 'normal';
+        var layer_Areacluster_23 = new L.geoJson.multiStyle(json_Areacluster_23, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Areacluster_23',
+            layerName: 'layer_Areacluster_23',
+            pane: 'pane_Areacluster_23',
+            onEachFeature: pop_Areacluster_23,
+            styles: [style_Areacluster_23_0,style_Areacluster_23_1,]
+        });
+        bounds_group.addLayer(layer_Areacluster_23);
+        map.addLayer(layer_Areacluster_23);
+        function pop_Punticlusterizzati_24(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punticlusterizzati_24_0(feature) {
+            switch(String(feature.properties['cluster_id'])) {
+                case '0':
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,238,233,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,127,94,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,90,217,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(151,239,138,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(63,134,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,29,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,18,82,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(156,204,51,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(100,207,143,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,193,30,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Punticlusterizzati_24',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(143,28,225,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Punticlusterizzati_24');
+        map.getPane('pane_Punticlusterizzati_24').style.zIndex = 424;
+        map.getPane('pane_Punticlusterizzati_24').style['mix-blend-mode'] = 'normal';
+        var layer_Punticlusterizzati_24 = new L.geoJson(json_Punticlusterizzati_24, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punticlusterizzati_24',
+            layerName: 'layer_Punticlusterizzati_24',
+            pane: 'pane_Punticlusterizzati_24',
+            onEachFeature: pop_Punticlusterizzati_24,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punticlusterizzati_24_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punticlusterizzati_24);
+        map.addLayer(layer_Punticlusterizzati_24);
+        function pop_Punti_25(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punti_25_0() {
+            return {
+                pane: 'pane_Punti_25',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Punti_25');
+        map.getPane('pane_Punti_25').style.zIndex = 425;
+        map.getPane('pane_Punti_25').style['mix-blend-mode'] = 'normal';
+        var layer_Punti_25 = new L.geoJson(json_Punti_25, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punti_25',
+            layerName: 'layer_Punti_25',
+            pane: 'pane_Punti_25',
+            onEachFeature: pop_Punti_25,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punti_25_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punti_25);
+        map.addLayer(layer_Punti_25);
+        function pop_Geofenceesistenti_26(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Geofenceesistenti_26_0() {
+            return {
+                pane: 'pane_Geofenceesistenti_26',
+                opacity: 1,
+                color: 'rgba(53,121,177,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Geofenceesistenti_26');
+        map.getPane('pane_Geofenceesistenti_26').style.zIndex = 426;
+        map.getPane('pane_Geofenceesistenti_26').style['mix-blend-mode'] = 'normal';
+        var layer_Geofenceesistenti_26 = new L.geoJson(json_Geofenceesistenti_26, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Geofenceesistenti_26',
+            layerName: 'layer_Geofenceesistenti_26',
+            pane: 'pane_Geofenceesistenti_26',
+            onEachFeature: pop_Geofenceesistenti_26,
+            style: style_Geofenceesistenti_26_0,
+        });
+        bounds_group.addLayer(layer_Geofenceesistenti_26);
+        map.addLayer(layer_Geofenceesistenti_26);
+        function pop_Areacluster_27(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Areacluster_27_0() {
+            return {
+                pane: 'pane_Areacluster_27',
+                interactive: true,
+            }
+        }
+        function style_Areacluster_27_1() {
+            return {
+                pane: 'pane_Areacluster_27',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Areacluster_27');
+        map.getPane('pane_Areacluster_27').style.zIndex = 427;
+        map.getPane('pane_Areacluster_27').style['mix-blend-mode'] = 'normal';
+        var layer_Areacluster_27 = new L.geoJson.multiStyle(json_Areacluster_27, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Areacluster_27',
+            layerName: 'layer_Areacluster_27',
+            pane: 'pane_Areacluster_27',
+            onEachFeature: pop_Areacluster_27,
+            styles: [style_Areacluster_27_0,style_Areacluster_27_1,]
+        });
+        bounds_group.addLayer(layer_Areacluster_27);
+        map.addLayer(layer_Areacluster_27);
+        function pop_Punticlusterizzati_28(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punticlusterizzati_28_0(feature) {
+            switch(String(feature.properties['cluster_id'])) {
+                case '0':
+                    return {
+                pane: 'pane_Punticlusterizzati_28',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(174,218,124,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Punticlusterizzati_28',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(181,132,237,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Punticlusterizzati_28',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,110,113,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Punticlusterizzati_28',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,203,199,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Punticlusterizzati_28');
+        map.getPane('pane_Punticlusterizzati_28').style.zIndex = 428;
+        map.getPane('pane_Punticlusterizzati_28').style['mix-blend-mode'] = 'normal';
+        var layer_Punticlusterizzati_28 = new L.geoJson(json_Punticlusterizzati_28, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punticlusterizzati_28',
+            layerName: 'layer_Punticlusterizzati_28',
+            pane: 'pane_Punticlusterizzati_28',
+            onEachFeature: pop_Punticlusterizzati_28,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punticlusterizzati_28_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punticlusterizzati_28);
+        map.addLayer(layer_Punticlusterizzati_28);
+        function pop_Punti_29(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punti_29_0() {
+            return {
+                pane: 'pane_Punti_29',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Punti_29');
+        map.getPane('pane_Punti_29').style.zIndex = 429;
+        map.getPane('pane_Punti_29').style['mix-blend-mode'] = 'normal';
+        var layer_Punti_29 = new L.geoJson(json_Punti_29, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punti_29',
+            layerName: 'layer_Punti_29',
+            pane: 'pane_Punti_29',
+            onEachFeature: pop_Punti_29,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punti_29_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punti_29);
+        map.addLayer(layer_Punti_29);
+        function pop_Geofenceesistenti_30(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Geofenceesistenti_30_0() {
+            return {
+                pane: 'pane_Geofenceesistenti_30',
+                opacity: 1,
+                color: 'rgba(77,175,74,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Geofenceesistenti_30');
+        map.getPane('pane_Geofenceesistenti_30').style.zIndex = 430;
+        map.getPane('pane_Geofenceesistenti_30').style['mix-blend-mode'] = 'normal';
+        var layer_Geofenceesistenti_30 = new L.geoJson(json_Geofenceesistenti_30, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Geofenceesistenti_30',
+            layerName: 'layer_Geofenceesistenti_30',
+            pane: 'pane_Geofenceesistenti_30',
+            onEachFeature: pop_Geofenceesistenti_30,
+            style: style_Geofenceesistenti_30_0,
+        });
+        bounds_group.addLayer(layer_Geofenceesistenti_30);
+        map.addLayer(layer_Geofenceesistenti_30);
+        function pop_Areacluster_31(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Areacluster_31_0() {
+            return {
+                pane: 'pane_Areacluster_31',
+                interactive: true,
+            }
+        }
+        function style_Areacluster_31_1() {
+            return {
+                pane: 'pane_Areacluster_31',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Areacluster_31');
+        map.getPane('pane_Areacluster_31').style.zIndex = 431;
+        map.getPane('pane_Areacluster_31').style['mix-blend-mode'] = 'normal';
+        var layer_Areacluster_31 = new L.geoJson.multiStyle(json_Areacluster_31, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Areacluster_31',
+            layerName: 'layer_Areacluster_31',
+            pane: 'pane_Areacluster_31',
+            onEachFeature: pop_Areacluster_31,
+            styles: [style_Areacluster_31_0,style_Areacluster_31_1,]
+        });
+        bounds_group.addLayer(layer_Areacluster_31);
+        map.addLayer(layer_Areacluster_31);
+        function pop_Punticlusterizzati_32(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punticlusterizzati_32_0(feature) {
+            switch(String(feature.properties['cluster_id'])) {
+                case '0':
+                    return {
+                pane: 'pane_Punticlusterizzati_32',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,49,164,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Punticlusterizzati_32',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(178,238,36,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Punticlusterizzati_32',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(45,159,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Punticlusterizzati_32',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,238,107,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Punticlusterizzati_32',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,142,104,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Punticlusterizzati_32',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,92,235,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Punticlusterizzati_32');
+        map.getPane('pane_Punticlusterizzati_32').style.zIndex = 432;
+        map.getPane('pane_Punticlusterizzati_32').style['mix-blend-mode'] = 'normal';
+        var layer_Punticlusterizzati_32 = new L.geoJson(json_Punticlusterizzati_32, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punticlusterizzati_32',
+            layerName: 'layer_Punticlusterizzati_32',
+            pane: 'pane_Punticlusterizzati_32',
+            onEachFeature: pop_Punticlusterizzati_32,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punticlusterizzati_32_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punticlusterizzati_32);
+        map.addLayer(layer_Punticlusterizzati_32);
+        function pop_Punti_33(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punti_33_0() {
+            return {
+                pane: 'pane_Punti_33',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Punti_33');
+        map.getPane('pane_Punti_33').style.zIndex = 433;
+        map.getPane('pane_Punti_33').style['mix-blend-mode'] = 'normal';
+        var layer_Punti_33 = new L.geoJson(json_Punti_33, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punti_33',
+            layerName: 'layer_Punti_33',
+            pane: 'pane_Punti_33',
+            onEachFeature: pop_Punti_33,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punti_33_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punti_33);
+        map.addLayer(layer_Punti_33);
+        function pop_Geofenceesistenti_34(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Geofenceesistenti_34_0() {
+            return {
+                pane: 'pane_Geofenceesistenti_34',
+                opacity: 1,
+                color: 'rgba(228,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Geofenceesistenti_34');
+        map.getPane('pane_Geofenceesistenti_34').style.zIndex = 434;
+        map.getPane('pane_Geofenceesistenti_34').style['mix-blend-mode'] = 'normal';
+        var layer_Geofenceesistenti_34 = new L.geoJson(json_Geofenceesistenti_34, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Geofenceesistenti_34',
+            layerName: 'layer_Geofenceesistenti_34',
+            pane: 'pane_Geofenceesistenti_34',
+            onEachFeature: pop_Geofenceesistenti_34,
+            style: style_Geofenceesistenti_34_0,
+        });
+        bounds_group.addLayer(layer_Geofenceesistenti_34);
+        map.addLayer(layer_Geofenceesistenti_34);
+        function pop_Areacluster_35(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Areacluster_35_0() {
+            return {
+                pane: 'pane_Areacluster_35',
+                interactive: true,
+            }
+        }
+        function style_Areacluster_35_1() {
+            return {
+                pane: 'pane_Areacluster_35',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Areacluster_35');
+        map.getPane('pane_Areacluster_35').style.zIndex = 435;
+        map.getPane('pane_Areacluster_35').style['mix-blend-mode'] = 'normal';
+        var layer_Areacluster_35 = new L.geoJson.multiStyle(json_Areacluster_35, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Areacluster_35',
+            layerName: 'layer_Areacluster_35',
+            pane: 'pane_Areacluster_35',
+            onEachFeature: pop_Areacluster_35,
+            styles: [style_Areacluster_35_0,style_Areacluster_35_1,]
+        });
+        bounds_group.addLayer(layer_Areacluster_35);
+        map.addLayer(layer_Areacluster_35);
+        function pop_Punticlusterizzati_36(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punticlusterizzati_36_0(feature) {
+            switch(String(feature.properties['cluster_id'])) {
+                case '0':
+                    return {
+                pane: 'pane_Punticlusterizzati_36',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,232,111,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Punticlusterizzati_36',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,192,107,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Punticlusterizzati_36',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(26,209,237,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Punticlusterizzati_36',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(23,46,219,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Punticlusterizzati_36',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,93,172,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Punticlusterizzati_36',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(172,57,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_Punticlusterizzati_36',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(207,94,74,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Punticlusterizzati_36',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(149,232,100,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Punticlusterizzati_36');
+        map.getPane('pane_Punticlusterizzati_36').style.zIndex = 436;
+        map.getPane('pane_Punticlusterizzati_36').style['mix-blend-mode'] = 'normal';
+        var layer_Punticlusterizzati_36 = new L.geoJson(json_Punticlusterizzati_36, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punticlusterizzati_36',
+            layerName: 'layer_Punticlusterizzati_36',
+            pane: 'pane_Punticlusterizzati_36',
+            onEachFeature: pop_Punticlusterizzati_36,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punticlusterizzati_36_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punticlusterizzati_36);
+        map.addLayer(layer_Punticlusterizzati_36);
+        function pop_Punti_37(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Punti_37_0() {
+            return {
+                pane: 'pane_Punti_37',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Punti_37');
+        map.getPane('pane_Punti_37').style.zIndex = 437;
+        map.getPane('pane_Punti_37').style['mix-blend-mode'] = 'normal';
+        var layer_Punti_37 = new L.geoJson(json_Punti_37, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Punti_37',
+            layerName: 'layer_Punti_37',
+            pane: 'pane_Punti_37',
+            onEachFeature: pop_Punti_37,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Punti_37_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Punti_37);
+        map.addLayer(layer_Punti_37);
+        function pop_Geofenceesistenti_38(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Geofenceesistenti_38_0() {
+            return {
+                pane: 'pane_Geofenceesistenti_38',
+                opacity: 1,
+                color: 'rgba(53,121,177,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Geofenceesistenti_38');
+        map.getPane('pane_Geofenceesistenti_38').style.zIndex = 438;
+        map.getPane('pane_Geofenceesistenti_38').style['mix-blend-mode'] = 'normal';
+        var layer_Geofenceesistenti_38 = new L.geoJson(json_Geofenceesistenti_38, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Geofenceesistenti_38',
+            layerName: 'layer_Geofenceesistenti_38',
+            pane: 'pane_Geofenceesistenti_38',
+            onEachFeature: pop_Geofenceesistenti_38,
+            style: style_Geofenceesistenti_38_0,
+        });
+        bounds_group.addLayer(layer_Geofenceesistenti_38);
+        map.addLayer(layer_Geofenceesistenti_38);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Geofenceesistenti_38.png" /> Geo-fence esistenti': layer_Geofenceesistenti_38,'<img src="legend/Punti_37.png" /> Punti': layer_Punti_37,'Punti clusterizzati<br /><table><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_36_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_36_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_36_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_36_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_36_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_36_55.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_36_66.png" /></td><td>6</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_36_7.png" /></td><td></td></tr></table>': layer_Punticlusterizzati_36,'<img src="legend/Areacluster_35.png" /> Area cluster': layer_Areacluster_35,'<img src="legend/Geofenceesistenti_34.png" /> Geo-fence esistenti': layer_Geofenceesistenti_34,'<img src="legend/Punti_33.png" /> Punti': layer_Punti_33,'Punti clusterizzati<br /><table><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_32_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_32_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_32_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_32_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_32_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_32_5.png" /></td><td></td></tr></table>': layer_Punticlusterizzati_32,'<img src="legend/Areacluster_31.png" /> Area cluster': layer_Areacluster_31,'<img src="legend/Geofenceesistenti_30.png" /> Geo-fence esistenti': layer_Geofenceesistenti_30,'<img src="legend/Punti_29.png" /> Punti': layer_Punti_29,'Punti clusterizzati<br /><table><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_28_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_28_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_28_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_28_3.png" /></td><td></td></tr></table>': layer_Punticlusterizzati_28,'<img src="legend/Areacluster_27.png" /> Area cluster': layer_Areacluster_27,'<img src="legend/Geofenceesistenti_26.png" /> Geo-fence esistenti': layer_Geofenceesistenti_26,'<img src="legend/Punti_25.png" /> Punti': layer_Punti_25,'Punti clusterizzati<br /><table><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_55.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_66.png" /></td><td>6</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_77.png" /></td><td>7</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_88.png" /></td><td>8</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_99.png" /></td><td>9</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_24_10.png" /></td><td></td></tr></table>': layer_Punticlusterizzati_24,'<img src="legend/Areacluster_23.png" /> Area cluster': layer_Areacluster_23,'<img src="legend/Geofenceesistenti_22.png" /> Geo-fence esistenti': layer_Geofenceesistenti_22,'<img src="legend/Punti_21.png" /> Punti': layer_Punti_21,'Punti clusterizzati<br /><table><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_55.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_66.png" /></td><td>6</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_77.png" /></td><td>7</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_88.png" /></td><td>8</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_99.png" /></td><td>9</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_20_10.png" /></td><td></td></tr></table>': layer_Punticlusterizzati_20,'<img src="legend/Areacluster_19.png" /> Area cluster': layer_Areacluster_19,'<img src="legend/Geofenceesistenti_18.png" /> Geo-fence esistenti': layer_Geofenceesistenti_18,'<img src="legend/Punti_17.png" /> Punti': layer_Punti_17,'Punti clusterizzati<br /><table><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_55.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_66.png" /></td><td>6</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_77.png" /></td><td>7</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_88.png" /></td><td>8</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_99.png" /></td><td>9</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_16_10.png" /></td><td></td></tr></table>': layer_Punticlusterizzati_16,'<img src="legend/Areacluster_15.png" /> Area cluster': layer_Areacluster_15,'<img src="legend/Punti_14.png" /> Punti': layer_Punti_14,'Punti clusterizzati<br /><table><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_13_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_13_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_13_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_13_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_13_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_13_55.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/Punticlusterizzati_13_6.png" /></td><td></td></tr></table>': layer_Punticlusterizzati_13,'Centroidi<br /><table><tr><td style="text-align: center;"><img src="legend/Centroidi_12_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/Centroidi_12_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Centroidi_12_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Centroidi_12_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Centroidi_12_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Centroidi_12_55.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/Centroidi_12_6.png" /></td><td></td></tr></table>': layer_Centroidi_12,'Area cluster<br /><table><tr><td style="text-align: center;"><img src="legend/Areacluster_11_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/Areacluster_11_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Areacluster_11_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Areacluster_11_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Areacluster_11_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Areacluster_11_55.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/Areacluster_11_6.png" /></td><td></td></tr></table>': layer_Areacluster_11,'Bike<br /><table><tr><td style="text-align: center;"><img src="legend/Bike_10_060.png" /></td><td>0 - 6</td></tr><tr><td style="text-align: center;"><img src="legend/Bike_10_6111.png" /></td><td>6 - 11</td></tr><tr><td style="text-align: center;"><img src="legend/Bike_10_11162.png" /></td><td>11 - 16</td></tr><tr><td style="text-align: center;"><img src="legend/Bike_10_16213.png" /></td><td>16 - 21</td></tr><tr><td style="text-align: center;"><img src="legend/Bike_10_21264.png" /></td><td>21 - 26</td></tr><tr><td style="text-align: center;"><img src="legend/Bike_10_26315.png" /></td><td>26 - 31</td></tr><tr><td style="text-align: center;"><img src="legend/Bike_10_31366.png" /></td><td>31 - 36</td></tr><tr><td style="text-align: center;"><img src="legend/Bike_10_36417.png" /></td><td>36 - 41</td></tr><tr><td style="text-align: center;"><img src="legend/Bike_10_41468.png" /></td><td>41 - 46</td></tr><tr><td style="text-align: center;"><img src="legend/Bike_10_469.png" /></td><td>> 46</td></tr></table>': layer_Bike_10,'Car<br /><table><tr><td style="text-align: center;"><img src="legend/Car_9_060.png" /></td><td>0 - 6</td></tr><tr><td style="text-align: center;"><img src="legend/Car_9_6111.png" /></td><td>6 - 11</td></tr><tr><td style="text-align: center;"><img src="legend/Car_9_11162.png" /></td><td>11 - 16</td></tr><tr><td style="text-align: center;"><img src="legend/Car_9_16213.png" /></td><td>16 - 21</td></tr><tr><td style="text-align: center;"><img src="legend/Car_9_21264.png" /></td><td>21 - 26</td></tr><tr><td style="text-align: center;"><img src="legend/Car_9_26315.png" /></td><td>26 - 31</td></tr><tr><td style="text-align: center;"><img src="legend/Car_9_31366.png" /></td><td>31 - 36</td></tr><tr><td style="text-align: center;"><img src="legend/Car_9_36417.png" /></td><td>36 - 41</td></tr><tr><td style="text-align: center;"><img src="legend/Car_9_41458.png" /></td><td>41 - 45</td></tr><tr><td style="text-align: center;"><img src="legend/Car_9_469.png" /></td><td>> 46</td></tr></table>': layer_Car_9,'Walk<br /><table><tr><td style="text-align: center;"><img src="legend/Walk_8_060.png" /></td><td>0 - 6</td></tr><tr><td style="text-align: center;"><img src="legend/Walk_8_6111.png" /></td><td>6 - 11</td></tr><tr><td style="text-align: center;"><img src="legend/Walk_8_11162.png" /></td><td>11 - 16</td></tr><tr><td style="text-align: center;"><img src="legend/Walk_8_16213.png" /></td><td>16 - 21</td></tr><tr><td style="text-align: center;"><img src="legend/Walk_8_21264.png" /></td><td>21 - 26</td></tr><tr><td style="text-align: center;"><img src="legend/Walk_8_26315.png" /></td><td>26 - 31</td></tr><tr><td style="text-align: center;"><img src="legend/Walk_8_31366.png" /></td><td>31 - 36</td></tr><tr><td style="text-align: center;"><img src="legend/Walk_8_36417.png" /></td><td>36 - 41</td></tr><tr><td style="text-align: center;"><img src="legend/Walk_8_41468.png" /></td><td>41 - 46</td></tr><tr><td style="text-align: center;"><img src="legend/Walk_8_469.png" /></td><td>> 46</td></tr></table>': layer_Walk_8,'<img src="legend/Bike_7.png" /> Bike': layer_Bike_7,'<img src="legend/Car_6.png" /> Car': layer_Car_6,'<img src="legend/Walk_5.png" /> Walk': layer_Walk_5,'Punti di campionamento<br /><table><tr><td style="text-align: center;"><img src="legend/Puntidicampionamento_4_user10activitybike0.png" /></td><td>user: 10, activity: bike</td></tr><tr><td style="text-align: center;"><img src="legend/Puntidicampionamento_4_user10activitycar1.png" /></td><td>user: 10, activity: car</td></tr><tr><td style="text-align: center;"><img src="legend/Puntidicampionamento_4_user10activitywalk2.png" /></td><td>user: 10, activity: walk</td></tr><tr><td style="text-align: center;"><img src="legend/Puntidicampionamento_4_user11activitybike3.png" /></td><td>user: 11, activity: bike</td></tr><tr><td style="text-align: center;"><img src="legend/Puntidicampionamento_4_user11activitycar4.png" /></td><td>user: 11, activity: car</td></tr><tr><td style="text-align: center;"><img src="legend/Puntidicampionamento_4_user11activitywalk5.png" /></td><td>user: 11, activity: walk</td></tr><tr><td style="text-align: center;"><img src="legend/Puntidicampionamento_4_6.png" /></td><td></td></tr></table>': layer_Puntidicampionamento_4,'Traiettorie<br /><table><tr><td style="text-align: center;"><img src="legend/Traiettorie_3_user10activitybike0.png" /></td><td>user: 10, activity: bike</td></tr><tr><td style="text-align: center;"><img src="legend/Traiettorie_3_user10activitycar1.png" /></td><td>user: 10, activity: car</td></tr><tr><td style="text-align: center;"><img src="legend/Traiettorie_3_user10activitywalk2.png" /></td><td>user: 10, activity: walk</td></tr><tr><td style="text-align: center;"><img src="legend/Traiettorie_3_user11activitybike3.png" /></td><td>user: 11, activity: bike</td></tr><tr><td style="text-align: center;"><img src="legend/Traiettorie_3_user11activitycar4.png" /></td><td>user: 11, activity: car</td></tr><tr><td style="text-align: center;"><img src="legend/Traiettorie_3_user11activitywalk5.png" /></td><td>user: 11, activity: walk</td></tr><tr><td style="text-align: center;"><img src="legend/Traiettorie_3_6.png" /></td><td></td></tr></table>': layer_Traiettorie_3,'Punti di campionamento<br /><table><tr><td style="text-align: center;"><img src="legend/Puntidicampionamento_2_bike0.png" /></td><td>bike</td></tr><tr><td style="text-align: center;"><img src="legend/Puntidicampionamento_2_car1.png" /></td><td>car</td></tr><tr><td style="text-align: center;"><img src="legend/Puntidicampionamento_2_walk2.png" /></td><td>walk</td></tr></table>': layer_Puntidicampionamento_2,'Traiettorie<br /><table><tr><td style="text-align: center;"><img src="legend/Traiettorie_1_bike0.png" /></td><td>bike</td></tr><tr><td style="text-align: center;"><img src="legend/Traiettorie_1_car1.png" /></td><td>car</td></tr><tr><td style="text-align: center;"><img src="legend/Traiettorie_1_walk2.png" /></td><td>walk</td></tr><tr><td style="text-align: center;"><img src="legend/Traiettorie_1_3.png" /></td><td></td></tr></table>': layer_Traiettorie_1,"OpenStreetMap": layer_OpenStreetMap_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_Traiettorie_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['user_activity'] !== null?String('<div style="color: #000000; font-size: 15pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['user_activity']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Traiettorie_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Traiettorie_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((exp_label_Traiettorie_3_eval_expression(context) !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + exp_label_Traiettorie_3_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Traiettorie_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Walk_8.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['activation_numbers'] !== null?String('<div style="color: #000000; font-size: 15pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['activation_numbers']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Walk_8'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Car_9.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['activation_numbers'] !== null?String('<div style="color: #000000; font-size: 15pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['activation_numbers']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Car_9'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Bike_10.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['activation_numbers'] !== null?String('<div style="color: #000000; font-size: 15pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['activation_numbers']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Bike_10'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Centroidi_12.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['centroid'] !== null?String('<div style="color: #000000; font-size: 30pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['centroid']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Centroidi_12'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Punticlusterizzati_16.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['cluster_id'] !== null?String('<div style="color: #000000; font-size: 15pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['cluster_id']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Punticlusterizzati_16'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Punticlusterizzati_20.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['cluster_id'] !== null?String('<div style="color: #000000; font-size: 15pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['cluster_id']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Punticlusterizzati_20'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Punticlusterizzati_24.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['cluster_id'] !== null?String('<div style="color: #000000; font-size: 15pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['cluster_id']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Punticlusterizzati_24'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Geofenceesistenti_26.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['gid'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['gid']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Geofenceesistenti_26'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Punticlusterizzati_28.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['cluster_id'] !== null?String('<div style="color: #000000; font-size: 15pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['cluster_id']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Punticlusterizzati_28'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Punticlusterizzati_32.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['cluster_id'] !== null?String('<div style="color: #000000; font-size: 15pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['cluster_id']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Punticlusterizzati_32'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Punticlusterizzati_36.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['cluster_id'] !== null?String('<div style="color: #000000; font-size: 15pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['cluster_id']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Punticlusterizzati_36'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Geofenceesistenti_38.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['gid'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['gid']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Geofenceesistenti_38'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Traiettorie_1,layer_Puntidicampionamento_2,layer_Traiettorie_3,layer_Puntidicampionamento_4,layer_Car_6,layer_Bike_7,layer_Walk_8,layer_Car_9,layer_Bike_10,layer_Centroidi_12,layer_Punticlusterizzati_13,layer_Punticlusterizzati_16,layer_Areacluster_19,layer_Punticlusterizzati_20,layer_Geofenceesistenti_22,layer_Areacluster_23,layer_Punticlusterizzati_24,layer_Geofenceesistenti_26,layer_Punticlusterizzati_28,layer_Areacluster_31,layer_Punticlusterizzati_32,layer_Geofenceesistenti_34,layer_Punticlusterizzati_36,layer_Geofenceesistenti_38]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Traiettorie_1,layer_Puntidicampionamento_2,layer_Traiettorie_3,layer_Puntidicampionamento_4,layer_Car_6,layer_Bike_7,layer_Walk_8,layer_Car_9,layer_Bike_10,layer_Centroidi_12,layer_Punticlusterizzati_13,layer_Punticlusterizzati_16,layer_Areacluster_19,layer_Punticlusterizzati_20,layer_Geofenceesistenti_22,layer_Areacluster_23,layer_Punticlusterizzati_24,layer_Geofenceesistenti_26,layer_Punticlusterizzati_28,layer_Areacluster_31,layer_Punticlusterizzati_32,layer_Geofenceesistenti_34,layer_Punticlusterizzati_36,layer_Geofenceesistenti_38]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Traiettorie_1,layer_Puntidicampionamento_2,layer_Traiettorie_3,layer_Puntidicampionamento_4,layer_Car_6,layer_Bike_7,layer_Walk_8,layer_Car_9,layer_Bike_10,layer_Centroidi_12,layer_Punticlusterizzati_13,layer_Punticlusterizzati_16,layer_Areacluster_19,layer_Punticlusterizzati_20,layer_Geofenceesistenti_22,layer_Areacluster_23,layer_Punticlusterizzati_24,layer_Geofenceesistenti_26,layer_Punticlusterizzati_28,layer_Areacluster_31,layer_Punticlusterizzati_32,layer_Geofenceesistenti_34,layer_Punticlusterizzati_36,layer_Geofenceesistenti_38]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Traiettorie_1,layer_Puntidicampionamento_2,layer_Traiettorie_3,layer_Puntidicampionamento_4,layer_Car_6,layer_Bike_7,layer_Walk_8,layer_Car_9,layer_Bike_10,layer_Centroidi_12,layer_Punticlusterizzati_13,layer_Punticlusterizzati_16,layer_Areacluster_19,layer_Punticlusterizzati_20,layer_Geofenceesistenti_22,layer_Areacluster_23,layer_Punticlusterizzati_24,layer_Geofenceesistenti_26,layer_Punticlusterizzati_28,layer_Areacluster_31,layer_Punticlusterizzati_32,layer_Geofenceesistenti_34,layer_Punticlusterizzati_36,layer_Geofenceesistenti_38]);
+        });
+        </script>
+    </body>
+</html>

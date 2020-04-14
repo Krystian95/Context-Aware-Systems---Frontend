@@ -1,0 +1,30 @@
+var json_Punti_12 = {
+"type": "FeatureCollection",
+"name": "Punti_12",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 904.0, "user_id": 10.0, "date_time": "2020-03-23T11:27:21.096" }, "geometry": { "type": "Point", "coordinates": [ 11.334203, 44.49555 ] } },
+{ "type": "Feature", "properties": { "id": 911.0, "user_id": 10.0, "date_time": "2020-03-23T11:29:09.912" }, "geometry": { "type": "Point", "coordinates": [ 11.335821, 44.493247 ] } },
+{ "type": "Feature", "properties": { "id": 923.0, "user_id": 10.0, "date_time": "2020-03-23T11:32:25.622" }, "geometry": { "type": "Point", "coordinates": [ 11.332039, 44.4955 ] } },
+{ "type": "Feature", "properties": { "id": 929.0, "user_id": 10.0, "date_time": "2020-03-23T13:15:30.879" }, "geometry": { "type": "Point", "coordinates": [ 11.340316, 44.488917 ] } },
+{ "type": "Feature", "properties": { "id": 934.0, "user_id": 10.0, "date_time": "2020-03-23T13:17:59.459" }, "geometry": { "type": "Point", "coordinates": [ 11.34271, 44.48987 ] } },
+{ "type": "Feature", "properties": { "id": 937.0, "user_id": 10.0, "date_time": "2020-03-23T13:20:41.544" }, "geometry": { "type": "Point", "coordinates": [ 11.340837, 44.489656 ] } },
+{ "type": "Feature", "properties": { "id": 943.0, "user_id": 10.0, "date_time": "2020-03-23T13:24:11.468" }, "geometry": { "type": "Point", "coordinates": [ 11.342311, 44.493552 ] } },
+{ "type": "Feature", "properties": { "id": 948.0, "user_id": 10.0, "date_time": "2020-03-23T13:26:57.111" }, "geometry": { "type": "Point", "coordinates": [ 11.342762, 44.494289 ] } },
+{ "type": "Feature", "properties": { "id": 951.0, "user_id": 10.0, "date_time": "2020-03-25T15:32:28.268" }, "geometry": { "type": "Point", "coordinates": [ 11.353376, 44.486904 ] } },
+{ "type": "Feature", "properties": { "id": 955.0, "user_id": 10.0, "date_time": "2020-03-25T15:33:41.078" }, "geometry": { "type": "Point", "coordinates": [ 11.349938, 44.490376 ] } },
+{ "type": "Feature", "properties": { "id": 959.0, "user_id": 10.0, "date_time": "2020-03-25T15:34:44.199" }, "geometry": { "type": "Point", "coordinates": [ 11.346368, 44.49269 ] } },
+{ "type": "Feature", "properties": { "id": 966.0, "user_id": 10.0, "date_time": "2020-03-27T13:04:56.564" }, "geometry": { "type": "Point", "coordinates": [ 11.3394, 44.501021 ] } },
+{ "type": "Feature", "properties": { "id": 971.0, "user_id": 10.0, "date_time": "2020-03-27T13:06:48.495" }, "geometry": { "type": "Point", "coordinates": [ 11.339866, 44.498919 ] } },
+{ "type": "Feature", "properties": { "id": 979.0, "user_id": 10.0, "date_time": "2020-03-27T13:13:33.931" }, "geometry": { "type": "Point", "coordinates": [ 11.340792, 44.493954 ] } },
+{ "type": "Feature", "properties": { "id": 983.0, "user_id": 10.0, "date_time": "2020-03-27T13:15:45.914" }, "geometry": { "type": "Point", "coordinates": [ 11.342194, 44.494936 ] } },
+{ "type": "Feature", "properties": { "id": 989.0, "user_id": 10.0, "date_time": "2020-03-27T18:42:08.871" }, "geometry": { "type": "Point", "coordinates": [ 11.345089, 44.501138 ] } },
+{ "type": "Feature", "properties": { "id": 995.0, "user_id": 10.0, "date_time": "2020-03-27T18:44:09.865" }, "geometry": { "type": "Point", "coordinates": [ 11.352453, 44.499232 ] } },
+{ "type": "Feature", "properties": { "id": 1007.0, "user_id": 10.0, "date_time": "2020-03-27T18:51:21.886" }, "geometry": { "type": "Point", "coordinates": [ 11.346804, 44.494454 ] } },
+{ "type": "Feature", "properties": { "id": 1021.0, "user_id": 10.0, "date_time": "2020-03-27T18:56:20.479" }, "geometry": { "type": "Point", "coordinates": [ 11.34377, 44.499068 ] } },
+{ "type": "Feature", "properties": { "id": 1025.0, "user_id": 11.0, "date_time": "2020-03-28T13:10:32.367" }, "geometry": { "type": "Point", "coordinates": [ 11.350444, 44.499731 ] } },
+{ "type": "Feature", "properties": { "id": 1028.0, "user_id": 11.0, "date_time": "2020-03-28T13:11:50.346" }, "geometry": { "type": "Point", "coordinates": [ 11.347766, 44.500412 ] } },
+{ "type": "Feature", "properties": { "id": 1034.0, "user_id": 11.0, "date_time": "2020-03-28T13:17:18.497" }, "geometry": { "type": "Point", "coordinates": [ 11.345438, 44.494398 ] } },
+{ "type": "Feature", "properties": { "id": 1039.0, "user_id": 11.0, "date_time": "2020-03-28T13:19:30.569" }, "geometry": { "type": "Point", "coordinates": [ 11.351781, 44.4922 ] } }
+]
+}

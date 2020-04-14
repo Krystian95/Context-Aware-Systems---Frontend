@@ -1,0 +1,1 @@
+var json_Areacluster_10 = {"type":"FeatureCollection","name":"Areacluster_10","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"centroid":5.0,"number_points":1.0,"geom_of_centroid":"SRID=4326;POINT(11.354232 44.498792)"},"geometry":{"type":"Point","coordinates":[11.354232,44.498792]}}]}

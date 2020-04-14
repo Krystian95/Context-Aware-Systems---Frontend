@@ -1,0 +1,14 @@
+var json_Areacluster_21 = {
+"type": "FeatureCollection",
+"name": "Areacluster_21",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "centroid": 0.0, "number_points": "2", "geom_of_centroid": "SRID=4326;POINT(11.3432045 44.4891635)" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 11.343, 44.488518 ], [ 11.343, 44.489809 ], [ 11.343409, 44.489809 ], [ 11.343409, 44.488518 ], [ 11.343, 44.488518 ] ] ] } },
+{ "type": "Feature", "properties": { "centroid": 1.0, "number_points": "2", "geom_of_centroid": "SRID=4326;POINT(11.3492715 44.490833)" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 11.348605, 44.490376 ], [ 11.348605, 44.49129 ], [ 11.349938, 44.49129 ], [ 11.349938, 44.490376 ], [ 11.348605, 44.490376 ] ] ] } },
+{ "type": "Feature", "properties": { "centroid": 2.0, "number_points": "5", "geom_of_centroid": "SRID=4326;POINT(11.3398514 44.4944524)" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 11.338663, 44.493954 ], [ 11.338663, 44.495461 ], [ 11.340879, 44.495461 ], [ 11.340879, 44.493954 ], [ 11.338663, 44.493954 ] ] ] } },
+{ "type": "Feature", "properties": { "centroid": 3.0, "number_points": "7", "geom_of_centroid": "SRID=4326;POINT(11.349252 44.5000414285714)" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 11.345532, 44.499232 ], [ 11.345532, 44.500968 ], [ 11.352453, 44.500968 ], [ 11.352453, 44.499232 ], [ 11.345532, 44.499232 ] ] ] } },
+{ "type": "Feature", "properties": { "centroid": 4.0, "number_points": "3", "geom_of_centroid": "SRID=4326;POINT(11.352341 44.501834)" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 11.351703, 44.501153 ], [ 11.351703, 44.50237 ], [ 11.352802, 44.50237 ], [ 11.352802, 44.501153 ], [ 11.351703, 44.501153 ] ] ] } },
+{ "type": "Feature", "properties": { "centroid": 5.0, "number_points": "2", "geom_of_centroid": "SRID=4326;POINT(11.347224 44.49391)" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 11.346506, 44.493629 ], [ 11.346506, 44.494191 ], [ 11.347942, 44.494191 ], [ 11.347942, 44.493629 ], [ 11.346506, 44.493629 ] ] ] } },
+{ "type": "Feature", "properties": { "centroid": 6.0, "number_points": "2", "geom_of_centroid": "SRID=4326;POINT(11.350888 44.492527)" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 11.349995, 44.4922 ], [ 11.349995, 44.492854 ], [ 11.351781, 44.492854 ], [ 11.351781, 44.4922 ], [ 11.349995, 44.4922 ] ] ] } }
+]
+}
