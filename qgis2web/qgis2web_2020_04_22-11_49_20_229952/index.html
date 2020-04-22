@@ -6,7 +6,7 @@
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="shortcut icon" type="image/x-icon" href="C:\Users\andre\AppData\Roaming\QGIS\QGIS3\profiles\default\qgis2web\templates\geojoy_icon.PNG" />
+        <link rel="shortcut icon" type="image/x-icon" href="geojoy_icon.PNG" />
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/filter.css">
@@ -2169,7 +2169,7 @@
                 interactive: false,
             }
                     break;
-                case 'NULL':
+                default:
                     return {
                 pane: 'pane_Punticlusterizzati_23',
                 radius: 8.0,
@@ -2435,7 +2435,7 @@
                 interactive: false,
             }
                     break;
-                case 'NULL':
+                default:
                     return {
                 pane: 'pane_Punticlusterizzati_27',
                 radius: 8.0,
@@ -2701,7 +2701,7 @@
                 interactive: false,
             }
                     break;
-                case 'NULL':
+                default:
                     return {
                 pane: 'pane_Punticlusterizzati_31',
                 radius: 8.0,
@@ -2968,7 +2968,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"id": "int","user_id": "int","session_id": "str","user_activity": "str","activity": "str"};
+        var Filters = {"user_id": "int","id": "int","user_activity": "str","activity": "str","session_id": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -3059,46 +3059,6 @@
         }
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_id = document.createElement("div");
-            div_id.id = "div_id";
-            div_id.className = "slider";
-            document.getElementById("menu").appendChild(div_id);
-            var lab_id = document.createElement('div');
-            lab_id.innerHTML  = 'id: <span id="val_id"></span>';
-            lab_id.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_id);
-            var reset_id = document.createElement('div');
-            reset_id.innerHTML = 'clear filter';
-            reset_id.className = 'filterlabel';
-            lab_id.className = 'filterlabel';
-            reset_id.onclick = function() {
-                sel_id.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_id);
-            var sel_id = document.getElementById('div_id');
-            noUiSlider.create(sel_id, {
-                connect: true,
-                start: [1040, 1366],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: 1040,
-                max: 1366
-                }
-            });
-            sel_id.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_id = document.getElementById('val_id');
-            val_id.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
             var div_user_id = document.createElement("div");
             div_user_id.id = "div_user_id";
             div_user_id.className = "slider";
@@ -3139,84 +3099,44 @@
             });
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_session_id = document.createElement('div');
-            div_session_id.id = "div_session_id";
-            div_session_id.className= "filterselect";
-            document.getElementById("menu").appendChild(div_session_id);
-            sel_session_id = document.createElement('select');
-            sel_session_id.multiple = true;
-            sel_session_id.size = 10;
-            sel_session_id.id = "sel_session_id";
-            var session_id_options_str = "<option value='' unselected></option>";
-            sel_session_id.onchange = function(){filterFunc()};
-            session_id_options_str  += '<option value="aclsfsehhojtppwjsjmjtokatisnnqkgufcwaxrtqupffdxesxccpumvzrbdldtscnvppvqxdrsclsjkcihezizxcvxzukkycopztscbzjetqnsvbwnqfzwzriiodqwg">aclsfsehhojtppwjsjmjtokatisnnqkgufcwaxrtqupffdxesxccpumvzrbdldtscnvppvqxdrsclsjkcihezizxcvxzukkycopztscbzjetqnsvbwnqfzwzriiodqwg</option>';
-            session_id_options_str  += '<option value="anwhyuxrwkgwdunhstipjmpsjirmufgtununrqustaywkhjeysljcynhotfqafugtxpltawbtusgaeskccscmjvrpxosgapjwtwuppghddahveyqfzjtbembnhtzxtfd">anwhyuxrwkgwdunhstipjmpsjirmufgtununrqustaywkhjeysljcynhotfqafugtxpltawbtusgaeskccscmjvrpxosgapjwtwuppghddahveyqfzjtbembnhtzxtfd</option>';
-            session_id_options_str  += '<option value="bascdyrnlbeaclerqnjzqrukiuexoobfsrkjfostxatefbcjdbyplrhwhqzyisqdlsnfyuinhxqlydbovocykefovuevcricmfwnemkimusqwkvurcezktyxqldcqbci">bascdyrnlbeaclerqnjzqrukiuexoobfsrkjfostxatefbcjdbyplrhwhqzyisqdlsnfyuinhxqlydbovocykefovuevcricmfwnemkimusqwkvurcezktyxqldcqbci</option>';
-            session_id_options_str  += '<option value="bpyxszdwvbhottcpebmzmowknabdieidlkblkvfiswaxttuzicrsqzqmyggxqxlofbpzubblnkxaultcdiriptebgegunzucvbpoppqrhuifctmhethzqileqcwgselz">bpyxszdwvbhottcpebmzmowknabdieidlkblkvfiswaxttuzicrsqzqmyggxqxlofbpzubblnkxaultcdiriptebgegunzucvbpoppqrhuifctmhethzqileqcwgselz</option>';
-            session_id_options_str  += '<option value="btkjkzlpumdbqbbmmaobgmwimpxgqjsctzqnonddwaxswysysatgfjsvhjyzbplhelcajdshbvvtelrajnmabvzyjqzdoovduzblgovvvyfibxhbndxrmiyzpujtpzst">btkjkzlpumdbqbbmmaobgmwimpxgqjsctzqnonddwaxswysysatgfjsvhjyzbplhelcajdshbvvtelrajnmabvzyjqzdoovduzblgovvvyfibxhbndxrmiyzpujtpzst</option>';
-            session_id_options_str  += '<option value="buvuqfwtkmqbohhdaxiwhmiycivquxrdtygnmllpvhemssxgnkxspufywiurcngrojwbqfxxauzoltevhsgeumzggpywlxazwjpmmzzumgfomdezknkpenmohdhodbjv">buvuqfwtkmqbohhdaxiwhmiycivquxrdtygnmllpvhemssxgnkxspufywiurcngrojwbqfxxauzoltevhsgeumzggpywlxazwjpmmzzumgfomdezknkpenmohdhodbjv</option>';
-            session_id_options_str  += '<option value="bxxshmryvovxwoqoyhuigfmokaqahbuvynfvetswlcjxhdupwsxfavibdopshzhvjurzzfhwijtgsvbtkvrkltqshijcasdunajlyhxqogrsqfbqhghqytwgpfvumcza">bxxshmryvovxwoqoyhuigfmokaqahbuvynfvetswlcjxhdupwsxfavibdopshzhvjurzzfhwijtgsvbtkvrkltqshijcasdunajlyhxqogrsqfbqhghqytwgpfvumcza</option>';
-            session_id_options_str  += '<option value="cavpczeyegakpxirjrnbrfrirideaduhpckzbfuzkxnqcrpcbafsebkglwlujwotzikwmiyijbkykfeizjcrhuolwkecrfpsyieldflgfwwgiurhooqwgdhxamgepqyz">cavpczeyegakpxirjrnbrfrirideaduhpckzbfuzkxnqcrpcbafsebkglwlujwotzikwmiyijbkykfeizjcrhuolwkecrfpsyieldflgfwwgiurhooqwgdhxamgepqyz</option>';
-            session_id_options_str  += '<option value="dryijlgynksuahvkgvwuybacneumjioprpvpmnkzzbguowtvfhmwlhaiducnvagnmmompocxmurzxdjpoqbibbzhejywevivdkxoythpzekyeylztvfxnwycnqynimjq">dryijlgynksuahvkgvwuybacneumjioprpvpmnkzzbguowtvfhmwlhaiducnvagnmmompocxmurzxdjpoqbibbzhejywevivdkxoythpzekyeylztvfxnwycnqynimjq</option>';
-            session_id_options_str  += '<option value="eoxcygqnxlvbirymywwphmeuparjgjldhcgqksewydmlpswmkoxvihzrwjcnappbdhgknfkbqlauebxgzwsfjmhnjrhflwxmutzbrdyuegnthqjakaydtxxhiolaioou">eoxcygqnxlvbirymywwphmeuparjgjldhcgqksewydmlpswmkoxvihzrwjcnappbdhgknfkbqlauebxgzwsfjmhnjrhflwxmutzbrdyuegnthqjakaydtxxhiolaioou</option>';
-            session_id_options_str  += '<option value="gxpinbrpvhikjtxhduotkodxzfkglfzpuvvdrxvqclaezglyuskkmbemcjankumnydkijztstmrjxkcqguemabrmdoftcrfoiwkkwhefvgkribpbltdbevxisiazljxc">gxpinbrpvhikjtxhduotkodxzfkglfzpuvvdrxvqclaezglyuskkmbemcjankumnydkijztstmrjxkcqguemabrmdoftcrfoiwkkwhefvgkribpbltdbevxisiazljxc</option>';
-            session_id_options_str  += '<option value="gzamawojswgqsaaxtpzxseediczfrrzsbwapobhgyasnxbpndtemkopyifvbkzprjgbabvdyzqlclteyogsfhfssfzcnzasuqdwvrgxjunzksvjibocywbpdewthpwsw">gzamawojswgqsaaxtpzxseediczfrrzsbwapobhgyasnxbpndtemkopyifvbkzprjgbabvdyzqlclteyogsfhfssfzcnzasuqdwvrgxjunzksvjibocywbpdewthpwsw</option>';
-            session_id_options_str  += '<option value="ivunuxebaidfwtfhkgrjqqwkgmoisrnvvtrfpdcjbrjribbmvsrbqfarcxcoggyudevzlpdvgzwnzyinixrvrlryuqdsbfsbcbiuxymnbnrtynfqrjpgeuxngoglmsas">ivunuxebaidfwtfhkgrjqqwkgmoisrnvvtrfpdcjbrjribbmvsrbqfarcxcoggyudevzlpdvgzwnzyinixrvrlryuqdsbfsbcbiuxymnbnrtynfqrjpgeuxngoglmsas</option>';
-            session_id_options_str  += '<option value="ixvwvrkhrnqpmhuwbmjfjsfcffifnjwrknrdgzzcehsrymogsksubqpixrjwomixcxgnllhfpyrwssclwmvfbcwkwznrrfewvgaycsomdtannmrttklatezrmlabujjy">ixvwvrkhrnqpmhuwbmjfjsfcffifnjwrknrdgzzcehsrymogsksubqpixrjwomixcxgnllhfpyrwssclwmvfbcwkwznrrfewvgaycsomdtannmrttklatezrmlabujjy</option>';
-            session_id_options_str  += '<option value="jctwdbjiuprwilvycrcwlvmqfhxnlkqpynrmrqdyshcowmpcxqbdvnovvxenaccmmpipiskjdsqgzlmidivjpwwtxmyuntalqefrtqtohumhvimbuuoxebqpnwbzoukm">jctwdbjiuprwilvycrcwlvmqfhxnlkqpynrmrqdyshcowmpcxqbdvnovvxenaccmmpipiskjdsqgzlmidivjpwwtxmyuntalqefrtqtohumhvimbuuoxebqpnwbzoukm</option>';
-            session_id_options_str  += '<option value="jwcryhqwavsofoxynqzfvgwkofnjqgasfnhcrnuirlrrdoaalaaftnhoyyxbjwpaapswpgarroeiwqiwapwsrvftzzqwcilmvtfglypjvwbdbyojidenwgthuucwwksr">jwcryhqwavsofoxynqzfvgwkofnjqgasfnhcrnuirlrrdoaalaaftnhoyyxbjwpaapswpgarroeiwqiwapwsrvftzzqwcilmvtfglypjvwbdbyojidenwgthuucwwksr</option>';
-            session_id_options_str  += '<option value="kwxiyxvjgsyntmekyiwjauadseoylbqpaqzvntemuqypwncyhwmoirbyewgnetlfrefdmzdbukjnynraqngktsetkhuhvkykqlsyzoleviekzgafmftjvqnngjhyyzzb">kwxiyxvjgsyntmekyiwjauadseoylbqpaqzvntemuqypwncyhwmoirbyewgnetlfrefdmzdbukjnynraqngktsetkhuhvkykqlsyzoleviekzgafmftjvqnngjhyyzzb</option>';
-            session_id_options_str  += '<option value="ljfluwycynpgllwopkulfubggfziouadtgvyiulsqtpyjoymbqvkcmemyiidmxekfzrnlvvjcibsdvhjsgdupqjpqloesvmniqhppnnwafwgvezdnxwoopvfvssnbbgv">ljfluwycynpgllwopkulfubggfziouadtgvyiulsqtpyjoymbqvkcmemyiidmxekfzrnlvvjcibsdvhjsgdupqjpqloesvmniqhppnnwafwgvezdnxwoopvfvssnbbgv</option>';
-            session_id_options_str  += '<option value="lkfausaktbqsfcuggtwzzuycaiorbacinmpuwmpeitpbpoedocklkphqkgvlralcycepkqhwujrwstgkywpaaoqxolxgjykxbzwrlfxefmkqnfuzjzlqslqpjtofynkb">lkfausaktbqsfcuggtwzzuycaiorbacinmpuwmpeitpbpoedocklkphqkgvlralcycepkqhwujrwstgkywpaaoqxolxgjykxbzwrlfxefmkqnfuzjzlqslqpjtofynkb</option>';
-            session_id_options_str  += '<option value="lrcnuehydfkqmabwfpwcewlrtpevwvapfpxmpwqzhtdnpvbewqhfrisewqvsqyhfdrgfrudlizhnyaobnxrdnfpukozfpscjiqxxjatrfiwwyydnftesakbvqrmrrupq">lrcnuehydfkqmabwfpwcewlrtpevwvapfpxmpwqzhtdnpvbewqhfrisewqvsqyhfdrgfrudlizhnyaobnxrdnfpukozfpscjiqxxjatrfiwwyydnftesakbvqrmrrupq</option>';
-            session_id_options_str  += '<option value="mhsxtyafapbezecexyjxupjuzfypwstmvnpumrxjycbfhfpqgkatzwrmjfmxnqbzayjbjfooesidlyfasnmflodkfhruoctswvfmyiivzycecgepfjpactdywjdwofza">mhsxtyafapbezecexyjxupjuzfypwstmvnpumrxjycbfhfpqgkatzwrmjfmxnqbzayjbjfooesidlyfasnmflodkfhruoctswvfmyiivzycecgepfjpactdywjdwofza</option>';
-            session_id_options_str  += '<option value="nmsgvcyskaqcadsahqhtgfrkqblwkgwqjrntuzzmzkbugrxnmawvnzjhdbuifwthyufwcboxfgstuuuuspdkwxswlkvzldhdufnduazzdvqwfywrgjiieypkcdzhnpxs">nmsgvcyskaqcadsahqhtgfrkqblwkgwqjrntuzzmzkbugrxnmawvnzjhdbuifwthyufwcboxfgstuuuuspdkwxswlkvzldhdufnduazzdvqwfywrgjiieypkcdzhnpxs</option>';
-            session_id_options_str  += '<option value="ocksmwhtlcumdqnatnbixvmdntmvunavbzemgyepcgfkepjalqnthsegwnycxlzkqpwstvgzappwsungujictbngaoycvcfzasydxotsptpvqiexonrnysafpsesykpw">ocksmwhtlcumdqnatnbixvmdntmvunavbzemgyepcgfkepjalqnthsegwnycxlzkqpwstvgzappwsungujictbngaoycvcfzasydxotsptpvqiexonrnysafpsesykpw</option>';
-            session_id_options_str  += '<option value="pmdsjzgpscmcpszrlqofplbxyvwfcxnescatlxzvlortrupvuwtgevshqcqrwvoyrqjccvlqepfezftoxawerdjpgjnyzjcuqcuxuoajcltqvqjbkrhxybtdboppybpb">pmdsjzgpscmcpszrlqofplbxyvwfcxnescatlxzvlortrupvuwtgevshqcqrwvoyrqjccvlqepfezftoxawerdjpgjnyzjcuqcuxuoajcltqvqjbkrhxybtdboppybpb</option>';
-            session_id_options_str  += '<option value="pngmxgrzeekjtgjefvcmfzbzbudwqcalkuftjdlnlkfbimgfifupppvedpnbpfusjupofgcrabvpvmnlituljepyruagvmudromjiwuorgskyevksbirdvyftdxfexrv">pngmxgrzeekjtgjefvcmfzbzbudwqcalkuftjdlnlkfbimgfifupppvedpnbpfusjupofgcrabvpvmnlituljepyruagvmudromjiwuorgskyevksbirdvyftdxfexrv</option>';
-            session_id_options_str  += '<option value="qnqumcbdzrfnqqehtzuptipokhofvudilbgotjxftncrsctycrumayycvxcfpjlusoimujbdvaahwdhpcgaiduvqxexyhitdmlfriudwgwmeryqweqfkkfaidkddmmzu">qnqumcbdzrfnqqehtzuptipokhofvudilbgotjxftncrsctycrumayycvxcfpjlusoimujbdvaahwdhpcgaiduvqxexyhitdmlfriudwgwmeryqweqfkkfaidkddmmzu</option>';
-            session_id_options_str  += '<option value="qzrdvqrduepvhmgscnrxkmxdenlmzdonpdxlpokjofedpddjejbhlwrakcbnobrituloelyvhdiedaidlomynnwbwjqomnetdccjovbgibfqucfslouxpjwslqjmczlq">qzrdvqrduepvhmgscnrxkmxdenlmzdonpdxlpokjofedpddjejbhlwrakcbnobrituloelyvhdiedaidlomynnwbwjqomnetdccjovbgibfqucfslouxpjwslqjmczlq</option>';
-            session_id_options_str  += '<option value="rqljwgczjbcwfdgghmdgeatqormcdfrpxkimfbyvzpgorykcovpfhsvrvyejqbtesisdbxrgfjzrgtmrzlegoeabgqkbdtkkczuzzrpuertlgobehbniontpajebrpox">rqljwgczjbcwfdgghmdgeatqormcdfrpxkimfbyvzpgorykcovpfhsvrvyejqbtesisdbxrgfjzrgtmrzlegoeabgqkbdtkkczuzzrpuertlgobehbniontpajebrpox</option>';
-            session_id_options_str  += '<option value="runalxxedkypuzxpkbsojsajslqeotvtzkpnpulzsieyufthxudqkcohaitsgvvizmtaqzqbexaewusglxctsnotroxkgtqkbxlxzsouaesvcqrlshysasiotlefalkz">runalxxedkypuzxpkbsojsajslqeotvtzkpnpulzsieyufthxudqkcohaitsgvvizmtaqzqbexaewusglxctsnotroxkgtqkbxlxzsouaesvcqrlshysasiotlefalkz</option>';
-            session_id_options_str  += '<option value="rxpaojeplcrsjhferaqgxigjlbkporkrcuwnbqvhzrsawfhsonktjypxluovxckadyxpiapmhngmmcntikcpvserjfycactthiqjvhjemtehnmahcvfjbgunghbugodj">rxpaojeplcrsjhferaqgxigjlbkporkrcuwnbqvhzrsawfhsonktjypxluovxckadyxpiapmhngmmcntikcpvserjfycactthiqjvhjemtehnmahcvfjbgunghbugodj</option>';
-            session_id_options_str  += '<option value="sijslmtilpzwomtwftyeninqbpmsromvvbgfxisybbfjaamfrvtpetfaagiutmdfalxjwsuyyirigahcqmmujfzsvnulmvgzcoeufdnbgldmfgipqzdivbbcrmznqpgl">sijslmtilpzwomtwftyeninqbpmsromvvbgfxisybbfjaamfrvtpetfaagiutmdfalxjwsuyyirigahcqmmujfzsvnulmvgzcoeufdnbgldmfgipqzdivbbcrmznqpgl</option>';
-            session_id_options_str  += '<option value="tehkvcktwkcpoywisgrwrfedlakbtbyqljlprjwybygopmvnjxivlfbndvtlchwsuywboknkwdlelpopvcfefgjtrozaqpdflrwkohaekwbgzdpblvgkbxthadwgtmyg">tehkvcktwkcpoywisgrwrfedlakbtbyqljlprjwybygopmvnjxivlfbndvtlchwsuywboknkwdlelpopvcfefgjtrozaqpdflrwkohaekwbgzdpblvgkbxthadwgtmyg</option>';
-            session_id_options_str  += '<option value="tgsejsgjuarzlpprdbsessivflqhtwaiplcojzhbhppqicuzaasyprorvvgdedcppqziyghjvkcithuvdzmncehowvvdnehcatplzoxayhgjzaucntqokissqgwbzhcx">tgsejsgjuarzlpprdbsessivflqhtwaiplcojzhbhppqicuzaasyprorvvgdedcppqziyghjvkcithuvdzmncehowvvdnehcatplzoxayhgjzaucntqokissqgwbzhcx</option>';
-            session_id_options_str  += '<option value="twwroqwvcxsnwdusbdhxhbeecebuadqjdvjwfhwtdbkcmcddhwboxwbxsyiuozkrprsnmmhovgbwaougdgfwpsgagkohclygmrpqfgwuovllfnqydhhwoprsywvblurh">twwroqwvcxsnwdusbdhxhbeecebuadqjdvjwfhwtdbkcmcddhwboxwbxsyiuozkrprsnmmhovgbwaougdgfwpsgagkohclygmrpqfgwuovllfnqydhhwoprsywvblurh</option>';
-            session_id_options_str  += '<option value="ufdljwivijrvphogwqfqhqzlmhaceiyybxkxrhutwcjfznankvnyfbjhltmpkouhsgadkrbcjakfwtonjkidjsbbyfxlqlstwacklgftssviecwncrwifzhwwrrjbujm">ufdljwivijrvphogwqfqhqzlmhaceiyybxkxrhutwcjfznankvnyfbjhltmpkouhsgadkrbcjakfwtonjkidjsbbyfxlqlstwacklgftssviecwncrwifzhwwrrjbujm</option>';
-            session_id_options_str  += '<option value="ufexpwponhirqdnmglkcwtcjijpcgwqniuimzspxrikuwcsantwmdfaxxxbojpsvyqzleeiixflkngykizxsxumfamteqtcfgrswajvzleprgmiwzvzhmkrdvnjyhgcr">ufexpwponhirqdnmglkcwtcjijpcgwqniuimzspxrikuwcsantwmdfaxxxbojpsvyqzleeiixflkngykizxsxumfamteqtcfgrswajvzleprgmiwzvzhmkrdvnjyhgcr</option>';
-            session_id_options_str  += '<option value="unxwnidrfsnwbqlmkwmgthuhwfomkbjgdgxbbtixrygkptieptmlahpmceinnltwnkmsmacftfrlwbzgeqteksfsqyybectqecrtxryroydrlclextoguygahcqcscdt">unxwnidrfsnwbqlmkwmgthuhwfomkbjgdgxbbtixrygkptieptmlahpmceinnltwnkmsmacftfrlwbzgeqteksfsqyybectqecrtxryroydrlclextoguygahcqcscdt</option>';
-            session_id_options_str  += '<option value="uojascglmatswavgvfcwttbickjoobxtyvvplofwudbbhczzlpdibibwgcewxodjuuoznosluphlwtsxgzjnurbwnwgmbqudxdxkdnucrisssslcifosfsicvorwcdoo">uojascglmatswavgvfcwttbickjoobxtyvvplofwudbbhczzlpdibibwgcewxodjuuoznosluphlwtsxgzjnurbwnwgmbqudxdxkdnucrisssslcifosfsicvorwcdoo</option>';
-            session_id_options_str  += '<option value="vfwwssdfltalmiagomzgssdabfnmxuisdxznfmifljmcwqucjmjlhtfyqewixiozykqpwbfnreoxutthuopejkjxfnnsdjaonjaectazfkrvjlpoofqjoqbzvrcujaex">vfwwssdfltalmiagomzgssdabfnmxuisdxznfmifljmcwqucjmjlhtfyqewixiozykqpwbfnreoxutthuopejkjxfnnsdjaonjaectazfkrvjlpoofqjoqbzvrcujaex</option>';
-            session_id_options_str  += '<option value="vledcohmaaelzawcdrmegojzhbpkankbztqlkajzooyaxpcjfnssbckjawrsqmnwktlpcoplntvimwatpndnwslobajtfjwppstwkisbindnslfwmsigmxaejlwvcbow">vledcohmaaelzawcdrmegojzhbpkankbztqlkajzooyaxpcjfnssbckjawrsqmnwktlpcoplntvimwatpndnwslobajtfjwppstwkisbindnslfwmsigmxaejlwvcbow</option>';
-            session_id_options_str  += '<option value="vlobqlljxcbvpybfuacxqtapznivjcbzlgiglkcncwvcgnnmemkvovexpexoktoflpdlblijtzvcxjyoykvmowzdcmuyzroicrsopgchwweekeuefgjultvcgaylydvu">vlobqlljxcbvpybfuacxqtapznivjcbzlgiglkcncwvcgnnmemkvovexpexoktoflpdlblijtzvcxjyoykvmowzdcmuyzroicrsopgchwweekeuefgjultvcgaylydvu</option>';
-            session_id_options_str  += '<option value="wbyhszfnarvkmmvfjpktfbgormkzkuzlrcimsfwyguhakfagnpkxxcdwjthwtlcoaptwqkjrnsvapillluvloerzybyrkjjogmkaedutlhgpcyeayclnurtkwwiojndu">wbyhszfnarvkmmvfjpktfbgormkzkuzlrcimsfwyguhakfagnpkxxcdwjthwtlcoaptwqkjrnsvapillluvloerzybyrkjjogmkaedutlhgpcyeayclnurtkwwiojndu</option>';
-            session_id_options_str  += '<option value="wgigykpblsqazxavgtwzqaajxwaygleptwsyarylhyprszhcaxhtzoqzazevxwmnglnkcbtwfqrfbwmeqlyadmpkkaokrppqrvxcgnobmpqqdfbdezyzpxmwfoxtvzxg">wgigykpblsqazxavgtwzqaajxwaygleptwsyarylhyprszhcaxhtzoqzazevxwmnglnkcbtwfqrfbwmeqlyadmpkkaokrppqrvxcgnobmpqqdfbdezyzpxmwfoxtvzxg</option>';
-            session_id_options_str  += '<option value="xjhvqxtncxizvdcezfjchnrpelgntjoeqbqellqooqtzuzsfkqfjrgovmlmzcykaecswfujyiaszzaljjkczkcybucrskggpyzlsdmdzivbkcappstppanffxghkjftw">xjhvqxtncxizvdcezfjchnrpelgntjoeqbqellqooqtzuzsfkqfjrgovmlmzcykaecswfujyiaszzaljjkczkcybucrskggpyzlsdmdzivbkcappstppanffxghkjftw</option>';
-            session_id_options_str  += '<option value="xpgpdljnkecjlrvmtfdxvilgpmkwfjcgjqlipvfgbmddvmnqzdmsbjeqtdxiydvgxwlnuhqkzroidterrfyneexhgkxfwdkwkypqbamshudrwuqotobkqnpsnfzvpadf">xpgpdljnkecjlrvmtfdxvilgpmkwfjcgjqlipvfgbmddvmnqzdmsbjeqtdxiydvgxwlnuhqkzroidterrfyneexhgkxfwdkwkypqbamshudrwuqotobkqnpsnfzvpadf</option>';
-            session_id_options_str  += '<option value="xqxylrtkwukynqkbxxqhnkozwnkwbmstqhsbkcavofbhncprmafmiwjvihmhmxtridcgvgnbgvnkjpnlvnioqajgggdexpbczzewaisssduleiruahmettxfochgnukx">xqxylrtkwukynqkbxxqhnkozwnkwbmstqhsbkcavofbhncprmafmiwjvihmhmxtridcgvgnbgvnkjpnlvnioqajgggdexpbczzewaisssduleiruahmettxfochgnukx</option>';
-            session_id_options_str  += '<option value="xvfeopexnwmlfktjyebjnyuxhraushhvvkmlttmkgadxvzmtmoezgfyiqaophnxfozcmdljaelppzgsvkbbktadbwvbkihapqlbqtmvakgcayezwegivspxgvmhurvgm">xvfeopexnwmlfktjyebjnyuxhraushhvvkmlttmkgadxvzmtmoezgfyiqaophnxfozcmdljaelppzgsvkbbktadbwvbkihapqlbqtmvakgcayezwegivspxgvmhurvgm</option>';
-            session_id_options_str  += '<option value="xzoxfnrbykknpalpqlzgqtfcqthdzopjgzgnjufqmlcjpjufhewalesfvhmzsbmbenohcbdluzwjvjdoboclbivyauvtimtrnqcisrbvatrhxotokuhjlaybwvtbuuuz">xzoxfnrbykknpalpqlzgqtfcqthdzopjgzgnjufqmlcjpjufhewalesfvhmzsbmbenohcbdluzwjvjdoboclbivyauvtimtrnqcisrbvatrhxotokuhjlaybwvtbuuuz</option>';
-            session_id_options_str  += '<option value="yilwyakixxryltiinxgbrhisrfthlxsfleoxyqwsijhkdlmvcibawhpgbbgcpweglesmkkxlcqzyggfqxheybyyibnlkpsssksottvcovsefakhpeodnshftvupzkvza">yilwyakixxryltiinxgbrhisrfthlxsfleoxyqwsijhkdlmvcibawhpgbbgcpweglesmkkxlcqzyggfqxheybyyibnlkpsssksottvcovsefakhpeodnshftvupzkvza</option>';
-            session_id_options_str  += '<option value="ynxmmwotwukqynaesypcfbmhwkrhrrhmwuzusfxnizjtiywfiqbfwlwyjnzbrtodgipiostjckipwcopyljnepsuidwkqlxggygdqavlccopmlevbzxpumqlbjycatfc">ynxmmwotwukqynaesypcfbmhwkrhrrhmwuzusfxnizjtiywfiqbfwlwyjnzbrtodgipiostjckipwcopyljnepsuidwkqlxggygdqavlccopmlevbzxpumqlbjycatfc</option>';
-            session_id_options_str  += '<option value="zuchjerynrnpvxgjvshoypvkgnhqwfrvsieaovipobmdxogogwggsaotgxbahakvocajnomijtgodquhlvgygkumajywmpiohhnsfknynimjewsvaonemdaaibjxlixj">zuchjerynrnpvxgjvshoypvkgnhqwfrvsieaovipobmdxogogwggsaotgxbahakvocajnomijtgodquhlvgygkumajywmpiohhnsfknynimjewsvaonemdaaibjxlixj</option>';
-            sel_session_id.innerHTML = session_id_options_str;
-            div_session_id.appendChild(sel_session_id);
-            var lab_session_id = document.createElement('div');
-            lab_session_id.innerHTML = 'session_id';
-            lab_session_id.className = 'filterlabel';
-            div_session_id.appendChild(lab_session_id);
-            var reset_session_id = document.createElement('div');
-            reset_session_id.innerHTML = 'clear filter';
-            reset_session_id.className = 'filterlabel';
-            reset_session_id.onclick = function() {
-                var options = document.getElementById("sel_session_id").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
+            var div_id = document.createElement("div");
+            div_id.id = "div_id";
+            div_id.className = "slider";
+            document.getElementById("menu").appendChild(div_id);
+            var lab_id = document.createElement('div');
+            lab_id.innerHTML  = 'id: <span id="val_id"></span>';
+            lab_id.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_id);
+            var reset_id = document.createElement('div');
+            reset_id.innerHTML = 'clear filter';
+            reset_id.className = 'filterlabel';
+            lab_id.className = 'filterlabel';
+            reset_id.onclick = function() {
+                sel_id.noUiSlider.reset();
             };
-            div_session_id.appendChild(reset_session_id);
+            document.getElementById("menu").appendChild(reset_id);
+            var sel_id = document.getElementById('div_id');
+            noUiSlider.create(sel_id, {
+                connect: true,
+                start: [1040, 1366],
+                step: 1,
+                format: wNumb({
+                    decimals: 0,
+                    }),
+                range: {
+                min: 1040,
+                max: 1366
+                }
+            });
+            sel_id.noUiSlider.on('update', function (values) {
+            filterVals =[];
+            for (value in values){
+            filterVals.push(parseInt(value))
+            }
+            val_id = document.getElementById('val_id');
+            val_id.innerHTML = values.join(' - ');
+                filterFunc()
+            });
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
             var div_user_activity = document.createElement('div');
@@ -3315,6 +3235,86 @@
                 filterFunc();
             };
             div_activity.appendChild(reset_activity);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_session_id = document.createElement('div');
+            div_session_id.id = "div_session_id";
+            div_session_id.className= "filterselect";
+            document.getElementById("menu").appendChild(div_session_id);
+            sel_session_id = document.createElement('select');
+            sel_session_id.multiple = true;
+            sel_session_id.size = 10;
+            sel_session_id.id = "sel_session_id";
+            var session_id_options_str = "<option value='' unselected></option>";
+            sel_session_id.onchange = function(){filterFunc()};
+            session_id_options_str  += '<option value="aclsfsehhojtppwjsjmjtokatisnnqkgufcwaxrtqupffdxesxccpumvzrbdldtscnvppvqxdrsclsjkcihezizxcvxzukkycopztscbzjetqnsvbwnqfzwzriiodqwg">aclsfsehhojtppwjsjmjtokatisnnqkgufcwaxrtqupffdxesxccpumvzrbdldtscnvppvqxdrsclsjkcihezizxcvxzukkycopztscbzjetqnsvbwnqfzwzriiodqwg</option>';
+            session_id_options_str  += '<option value="anwhyuxrwkgwdunhstipjmpsjirmufgtununrqustaywkhjeysljcynhotfqafugtxpltawbtusgaeskccscmjvrpxosgapjwtwuppghddahveyqfzjtbembnhtzxtfd">anwhyuxrwkgwdunhstipjmpsjirmufgtununrqustaywkhjeysljcynhotfqafugtxpltawbtusgaeskccscmjvrpxosgapjwtwuppghddahveyqfzjtbembnhtzxtfd</option>';
+            session_id_options_str  += '<option value="bascdyrnlbeaclerqnjzqrukiuexoobfsrkjfostxatefbcjdbyplrhwhqzyisqdlsnfyuinhxqlydbovocykefovuevcricmfwnemkimusqwkvurcezktyxqldcqbci">bascdyrnlbeaclerqnjzqrukiuexoobfsrkjfostxatefbcjdbyplrhwhqzyisqdlsnfyuinhxqlydbovocykefovuevcricmfwnemkimusqwkvurcezktyxqldcqbci</option>';
+            session_id_options_str  += '<option value="bpyxszdwvbhottcpebmzmowknabdieidlkblkvfiswaxttuzicrsqzqmyggxqxlofbpzubblnkxaultcdiriptebgegunzucvbpoppqrhuifctmhethzqileqcwgselz">bpyxszdwvbhottcpebmzmowknabdieidlkblkvfiswaxttuzicrsqzqmyggxqxlofbpzubblnkxaultcdiriptebgegunzucvbpoppqrhuifctmhethzqileqcwgselz</option>';
+            session_id_options_str  += '<option value="btkjkzlpumdbqbbmmaobgmwimpxgqjsctzqnonddwaxswysysatgfjsvhjyzbplhelcajdshbvvtelrajnmabvzyjqzdoovduzblgovvvyfibxhbndxrmiyzpujtpzst">btkjkzlpumdbqbbmmaobgmwimpxgqjsctzqnonddwaxswysysatgfjsvhjyzbplhelcajdshbvvtelrajnmabvzyjqzdoovduzblgovvvyfibxhbndxrmiyzpujtpzst</option>';
+            session_id_options_str  += '<option value="buvuqfwtkmqbohhdaxiwhmiycivquxrdtygnmllpvhemssxgnkxspufywiurcngrojwbqfxxauzoltevhsgeumzggpywlxazwjpmmzzumgfomdezknkpenmohdhodbjv">buvuqfwtkmqbohhdaxiwhmiycivquxrdtygnmllpvhemssxgnkxspufywiurcngrojwbqfxxauzoltevhsgeumzggpywlxazwjpmmzzumgfomdezknkpenmohdhodbjv</option>';
+            session_id_options_str  += '<option value="bxxshmryvovxwoqoyhuigfmokaqahbuvynfvetswlcjxhdupwsxfavibdopshzhvjurzzfhwijtgsvbtkvrkltqshijcasdunajlyhxqogrsqfbqhghqytwgpfvumcza">bxxshmryvovxwoqoyhuigfmokaqahbuvynfvetswlcjxhdupwsxfavibdopshzhvjurzzfhwijtgsvbtkvrkltqshijcasdunajlyhxqogrsqfbqhghqytwgpfvumcza</option>';
+            session_id_options_str  += '<option value="cavpczeyegakpxirjrnbrfrirideaduhpckzbfuzkxnqcrpcbafsebkglwlujwotzikwmiyijbkykfeizjcrhuolwkecrfpsyieldflgfwwgiurhooqwgdhxamgepqyz">cavpczeyegakpxirjrnbrfrirideaduhpckzbfuzkxnqcrpcbafsebkglwlujwotzikwmiyijbkykfeizjcrhuolwkecrfpsyieldflgfwwgiurhooqwgdhxamgepqyz</option>';
+            session_id_options_str  += '<option value="dryijlgynksuahvkgvwuybacneumjioprpvpmnkzzbguowtvfhmwlhaiducnvagnmmompocxmurzxdjpoqbibbzhejywevivdkxoythpzekyeylztvfxnwycnqynimjq">dryijlgynksuahvkgvwuybacneumjioprpvpmnkzzbguowtvfhmwlhaiducnvagnmmompocxmurzxdjpoqbibbzhejywevivdkxoythpzekyeylztvfxnwycnqynimjq</option>';
+            session_id_options_str  += '<option value="eoxcygqnxlvbirymywwphmeuparjgjldhcgqksewydmlpswmkoxvihzrwjcnappbdhgknfkbqlauebxgzwsfjmhnjrhflwxmutzbrdyuegnthqjakaydtxxhiolaioou">eoxcygqnxlvbirymywwphmeuparjgjldhcgqksewydmlpswmkoxvihzrwjcnappbdhgknfkbqlauebxgzwsfjmhnjrhflwxmutzbrdyuegnthqjakaydtxxhiolaioou</option>';
+            session_id_options_str  += '<option value="gxpinbrpvhikjtxhduotkodxzfkglfzpuvvdrxvqclaezglyuskkmbemcjankumnydkijztstmrjxkcqguemabrmdoftcrfoiwkkwhefvgkribpbltdbevxisiazljxc">gxpinbrpvhikjtxhduotkodxzfkglfzpuvvdrxvqclaezglyuskkmbemcjankumnydkijztstmrjxkcqguemabrmdoftcrfoiwkkwhefvgkribpbltdbevxisiazljxc</option>';
+            session_id_options_str  += '<option value="gzamawojswgqsaaxtpzxseediczfrrzsbwapobhgyasnxbpndtemkopyifvbkzprjgbabvdyzqlclteyogsfhfssfzcnzasuqdwvrgxjunzksvjibocywbpdewthpwsw">gzamawojswgqsaaxtpzxseediczfrrzsbwapobhgyasnxbpndtemkopyifvbkzprjgbabvdyzqlclteyogsfhfssfzcnzasuqdwvrgxjunzksvjibocywbpdewthpwsw</option>';
+            session_id_options_str  += '<option value="ivunuxebaidfwtfhkgrjqqwkgmoisrnvvtrfpdcjbrjribbmvsrbqfarcxcoggyudevzlpdvgzwnzyinixrvrlryuqdsbfsbcbiuxymnbnrtynfqrjpgeuxngoglmsas">ivunuxebaidfwtfhkgrjqqwkgmoisrnvvtrfpdcjbrjribbmvsrbqfarcxcoggyudevzlpdvgzwnzyinixrvrlryuqdsbfsbcbiuxymnbnrtynfqrjpgeuxngoglmsas</option>';
+            session_id_options_str  += '<option value="ixvwvrkhrnqpmhuwbmjfjsfcffifnjwrknrdgzzcehsrymogsksubqpixrjwomixcxgnllhfpyrwssclwmvfbcwkwznrrfewvgaycsomdtannmrttklatezrmlabujjy">ixvwvrkhrnqpmhuwbmjfjsfcffifnjwrknrdgzzcehsrymogsksubqpixrjwomixcxgnllhfpyrwssclwmvfbcwkwznrrfewvgaycsomdtannmrttklatezrmlabujjy</option>';
+            session_id_options_str  += '<option value="jctwdbjiuprwilvycrcwlvmqfhxnlkqpynrmrqdyshcowmpcxqbdvnovvxenaccmmpipiskjdsqgzlmidivjpwwtxmyuntalqefrtqtohumhvimbuuoxebqpnwbzoukm">jctwdbjiuprwilvycrcwlvmqfhxnlkqpynrmrqdyshcowmpcxqbdvnovvxenaccmmpipiskjdsqgzlmidivjpwwtxmyuntalqefrtqtohumhvimbuuoxebqpnwbzoukm</option>';
+            session_id_options_str  += '<option value="jwcryhqwavsofoxynqzfvgwkofnjqgasfnhcrnuirlrrdoaalaaftnhoyyxbjwpaapswpgarroeiwqiwapwsrvftzzqwcilmvtfglypjvwbdbyojidenwgthuucwwksr">jwcryhqwavsofoxynqzfvgwkofnjqgasfnhcrnuirlrrdoaalaaftnhoyyxbjwpaapswpgarroeiwqiwapwsrvftzzqwcilmvtfglypjvwbdbyojidenwgthuucwwksr</option>';
+            session_id_options_str  += '<option value="kwxiyxvjgsyntmekyiwjauadseoylbqpaqzvntemuqypwncyhwmoirbyewgnetlfrefdmzdbukjnynraqngktsetkhuhvkykqlsyzoleviekzgafmftjvqnngjhyyzzb">kwxiyxvjgsyntmekyiwjauadseoylbqpaqzvntemuqypwncyhwmoirbyewgnetlfrefdmzdbukjnynraqngktsetkhuhvkykqlsyzoleviekzgafmftjvqnngjhyyzzb</option>';
+            session_id_options_str  += '<option value="ljfluwycynpgllwopkulfubggfziouadtgvyiulsqtpyjoymbqvkcmemyiidmxekfzrnlvvjcibsdvhjsgdupqjpqloesvmniqhppnnwafwgvezdnxwoopvfvssnbbgv">ljfluwycynpgllwopkulfubggfziouadtgvyiulsqtpyjoymbqvkcmemyiidmxekfzrnlvvjcibsdvhjsgdupqjpqloesvmniqhppnnwafwgvezdnxwoopvfvssnbbgv</option>';
+            session_id_options_str  += '<option value="lkfausaktbqsfcuggtwzzuycaiorbacinmpuwmpeitpbpoedocklkphqkgvlralcycepkqhwujrwstgkywpaaoqxolxgjykxbzwrlfxefmkqnfuzjzlqslqpjtofynkb">lkfausaktbqsfcuggtwzzuycaiorbacinmpuwmpeitpbpoedocklkphqkgvlralcycepkqhwujrwstgkywpaaoqxolxgjykxbzwrlfxefmkqnfuzjzlqslqpjtofynkb</option>';
+            session_id_options_str  += '<option value="lrcnuehydfkqmabwfpwcewlrtpevwvapfpxmpwqzhtdnpvbewqhfrisewqvsqyhfdrgfrudlizhnyaobnxrdnfpukozfpscjiqxxjatrfiwwyydnftesakbvqrmrrupq">lrcnuehydfkqmabwfpwcewlrtpevwvapfpxmpwqzhtdnpvbewqhfrisewqvsqyhfdrgfrudlizhnyaobnxrdnfpukozfpscjiqxxjatrfiwwyydnftesakbvqrmrrupq</option>';
+            session_id_options_str  += '<option value="mhsxtyafapbezecexyjxupjuzfypwstmvnpumrxjycbfhfpqgkatzwrmjfmxnqbzayjbjfooesidlyfasnmflodkfhruoctswvfmyiivzycecgepfjpactdywjdwofza">mhsxtyafapbezecexyjxupjuzfypwstmvnpumrxjycbfhfpqgkatzwrmjfmxnqbzayjbjfooesidlyfasnmflodkfhruoctswvfmyiivzycecgepfjpactdywjdwofza</option>';
+            session_id_options_str  += '<option value="nmsgvcyskaqcadsahqhtgfrkqblwkgwqjrntuzzmzkbugrxnmawvnzjhdbuifwthyufwcboxfgstuuuuspdkwxswlkvzldhdufnduazzdvqwfywrgjiieypkcdzhnpxs">nmsgvcyskaqcadsahqhtgfrkqblwkgwqjrntuzzmzkbugrxnmawvnzjhdbuifwthyufwcboxfgstuuuuspdkwxswlkvzldhdufnduazzdvqwfywrgjiieypkcdzhnpxs</option>';
+            session_id_options_str  += '<option value="ocksmwhtlcumdqnatnbixvmdntmvunavbzemgyepcgfkepjalqnthsegwnycxlzkqpwstvgzappwsungujictbngaoycvcfzasydxotsptpvqiexonrnysafpsesykpw">ocksmwhtlcumdqnatnbixvmdntmvunavbzemgyepcgfkepjalqnthsegwnycxlzkqpwstvgzappwsungujictbngaoycvcfzasydxotsptpvqiexonrnysafpsesykpw</option>';
+            session_id_options_str  += '<option value="pmdsjzgpscmcpszrlqofplbxyvwfcxnescatlxzvlortrupvuwtgevshqcqrwvoyrqjccvlqepfezftoxawerdjpgjnyzjcuqcuxuoajcltqvqjbkrhxybtdboppybpb">pmdsjzgpscmcpszrlqofplbxyvwfcxnescatlxzvlortrupvuwtgevshqcqrwvoyrqjccvlqepfezftoxawerdjpgjnyzjcuqcuxuoajcltqvqjbkrhxybtdboppybpb</option>';
+            session_id_options_str  += '<option value="pngmxgrzeekjtgjefvcmfzbzbudwqcalkuftjdlnlkfbimgfifupppvedpnbpfusjupofgcrabvpvmnlituljepyruagvmudromjiwuorgskyevksbirdvyftdxfexrv">pngmxgrzeekjtgjefvcmfzbzbudwqcalkuftjdlnlkfbimgfifupppvedpnbpfusjupofgcrabvpvmnlituljepyruagvmudromjiwuorgskyevksbirdvyftdxfexrv</option>';
+            session_id_options_str  += '<option value="qnqumcbdzrfnqqehtzuptipokhofvudilbgotjxftncrsctycrumayycvxcfpjlusoimujbdvaahwdhpcgaiduvqxexyhitdmlfriudwgwmeryqweqfkkfaidkddmmzu">qnqumcbdzrfnqqehtzuptipokhofvudilbgotjxftncrsctycrumayycvxcfpjlusoimujbdvaahwdhpcgaiduvqxexyhitdmlfriudwgwmeryqweqfkkfaidkddmmzu</option>';
+            session_id_options_str  += '<option value="qzrdvqrduepvhmgscnrxkmxdenlmzdonpdxlpokjofedpddjejbhlwrakcbnobrituloelyvhdiedaidlomynnwbwjqomnetdccjovbgibfqucfslouxpjwslqjmczlq">qzrdvqrduepvhmgscnrxkmxdenlmzdonpdxlpokjofedpddjejbhlwrakcbnobrituloelyvhdiedaidlomynnwbwjqomnetdccjovbgibfqucfslouxpjwslqjmczlq</option>';
+            session_id_options_str  += '<option value="rqljwgczjbcwfdgghmdgeatqormcdfrpxkimfbyvzpgorykcovpfhsvrvyejqbtesisdbxrgfjzrgtmrzlegoeabgqkbdtkkczuzzrpuertlgobehbniontpajebrpox">rqljwgczjbcwfdgghmdgeatqormcdfrpxkimfbyvzpgorykcovpfhsvrvyejqbtesisdbxrgfjzrgtmrzlegoeabgqkbdtkkczuzzrpuertlgobehbniontpajebrpox</option>';
+            session_id_options_str  += '<option value="runalxxedkypuzxpkbsojsajslqeotvtzkpnpulzsieyufthxudqkcohaitsgvvizmtaqzqbexaewusglxctsnotroxkgtqkbxlxzsouaesvcqrlshysasiotlefalkz">runalxxedkypuzxpkbsojsajslqeotvtzkpnpulzsieyufthxudqkcohaitsgvvizmtaqzqbexaewusglxctsnotroxkgtqkbxlxzsouaesvcqrlshysasiotlefalkz</option>';
+            session_id_options_str  += '<option value="rxpaojeplcrsjhferaqgxigjlbkporkrcuwnbqvhzrsawfhsonktjypxluovxckadyxpiapmhngmmcntikcpvserjfycactthiqjvhjemtehnmahcvfjbgunghbugodj">rxpaojeplcrsjhferaqgxigjlbkporkrcuwnbqvhzrsawfhsonktjypxluovxckadyxpiapmhngmmcntikcpvserjfycactthiqjvhjemtehnmahcvfjbgunghbugodj</option>';
+            session_id_options_str  += '<option value="sijslmtilpzwomtwftyeninqbpmsromvvbgfxisybbfjaamfrvtpetfaagiutmdfalxjwsuyyirigahcqmmujfzsvnulmvgzcoeufdnbgldmfgipqzdivbbcrmznqpgl">sijslmtilpzwomtwftyeninqbpmsromvvbgfxisybbfjaamfrvtpetfaagiutmdfalxjwsuyyirigahcqmmujfzsvnulmvgzcoeufdnbgldmfgipqzdivbbcrmznqpgl</option>';
+            session_id_options_str  += '<option value="tehkvcktwkcpoywisgrwrfedlakbtbyqljlprjwybygopmvnjxivlfbndvtlchwsuywboknkwdlelpopvcfefgjtrozaqpdflrwkohaekwbgzdpblvgkbxthadwgtmyg">tehkvcktwkcpoywisgrwrfedlakbtbyqljlprjwybygopmvnjxivlfbndvtlchwsuywboknkwdlelpopvcfefgjtrozaqpdflrwkohaekwbgzdpblvgkbxthadwgtmyg</option>';
+            session_id_options_str  += '<option value="tgsejsgjuarzlpprdbsessivflqhtwaiplcojzhbhppqicuzaasyprorvvgdedcppqziyghjvkcithuvdzmncehowvvdnehcatplzoxayhgjzaucntqokissqgwbzhcx">tgsejsgjuarzlpprdbsessivflqhtwaiplcojzhbhppqicuzaasyprorvvgdedcppqziyghjvkcithuvdzmncehowvvdnehcatplzoxayhgjzaucntqokissqgwbzhcx</option>';
+            session_id_options_str  += '<option value="twwroqwvcxsnwdusbdhxhbeecebuadqjdvjwfhwtdbkcmcddhwboxwbxsyiuozkrprsnmmhovgbwaougdgfwpsgagkohclygmrpqfgwuovllfnqydhhwoprsywvblurh">twwroqwvcxsnwdusbdhxhbeecebuadqjdvjwfhwtdbkcmcddhwboxwbxsyiuozkrprsnmmhovgbwaougdgfwpsgagkohclygmrpqfgwuovllfnqydhhwoprsywvblurh</option>';
+            session_id_options_str  += '<option value="ufdljwivijrvphogwqfqhqzlmhaceiyybxkxrhutwcjfznankvnyfbjhltmpkouhsgadkrbcjakfwtonjkidjsbbyfxlqlstwacklgftssviecwncrwifzhwwrrjbujm">ufdljwivijrvphogwqfqhqzlmhaceiyybxkxrhutwcjfznankvnyfbjhltmpkouhsgadkrbcjakfwtonjkidjsbbyfxlqlstwacklgftssviecwncrwifzhwwrrjbujm</option>';
+            session_id_options_str  += '<option value="ufexpwponhirqdnmglkcwtcjijpcgwqniuimzspxrikuwcsantwmdfaxxxbojpsvyqzleeiixflkngykizxsxumfamteqtcfgrswajvzleprgmiwzvzhmkrdvnjyhgcr">ufexpwponhirqdnmglkcwtcjijpcgwqniuimzspxrikuwcsantwmdfaxxxbojpsvyqzleeiixflkngykizxsxumfamteqtcfgrswajvzleprgmiwzvzhmkrdvnjyhgcr</option>';
+            session_id_options_str  += '<option value="unxwnidrfsnwbqlmkwmgthuhwfomkbjgdgxbbtixrygkptieptmlahpmceinnltwnkmsmacftfrlwbzgeqteksfsqyybectqecrtxryroydrlclextoguygahcqcscdt">unxwnidrfsnwbqlmkwmgthuhwfomkbjgdgxbbtixrygkptieptmlahpmceinnltwnkmsmacftfrlwbzgeqteksfsqyybectqecrtxryroydrlclextoguygahcqcscdt</option>';
+            session_id_options_str  += '<option value="uojascglmatswavgvfcwttbickjoobxtyvvplofwudbbhczzlpdibibwgcewxodjuuoznosluphlwtsxgzjnurbwnwgmbqudxdxkdnucrisssslcifosfsicvorwcdoo">uojascglmatswavgvfcwttbickjoobxtyvvplofwudbbhczzlpdibibwgcewxodjuuoznosluphlwtsxgzjnurbwnwgmbqudxdxkdnucrisssslcifosfsicvorwcdoo</option>';
+            session_id_options_str  += '<option value="vfwwssdfltalmiagomzgssdabfnmxuisdxznfmifljmcwqucjmjlhtfyqewixiozykqpwbfnreoxutthuopejkjxfnnsdjaonjaectazfkrvjlpoofqjoqbzvrcujaex">vfwwssdfltalmiagomzgssdabfnmxuisdxznfmifljmcwqucjmjlhtfyqewixiozykqpwbfnreoxutthuopejkjxfnnsdjaonjaectazfkrvjlpoofqjoqbzvrcujaex</option>';
+            session_id_options_str  += '<option value="vledcohmaaelzawcdrmegojzhbpkankbztqlkajzooyaxpcjfnssbckjawrsqmnwktlpcoplntvimwatpndnwslobajtfjwppstwkisbindnslfwmsigmxaejlwvcbow">vledcohmaaelzawcdrmegojzhbpkankbztqlkajzooyaxpcjfnssbckjawrsqmnwktlpcoplntvimwatpndnwslobajtfjwppstwkisbindnslfwmsigmxaejlwvcbow</option>';
+            session_id_options_str  += '<option value="vlobqlljxcbvpybfuacxqtapznivjcbzlgiglkcncwvcgnnmemkvovexpexoktoflpdlblijtzvcxjyoykvmowzdcmuyzroicrsopgchwweekeuefgjultvcgaylydvu">vlobqlljxcbvpybfuacxqtapznivjcbzlgiglkcncwvcgnnmemkvovexpexoktoflpdlblijtzvcxjyoykvmowzdcmuyzroicrsopgchwweekeuefgjultvcgaylydvu</option>';
+            session_id_options_str  += '<option value="wbyhszfnarvkmmvfjpktfbgormkzkuzlrcimsfwyguhakfagnpkxxcdwjthwtlcoaptwqkjrnsvapillluvloerzybyrkjjogmkaedutlhgpcyeayclnurtkwwiojndu">wbyhszfnarvkmmvfjpktfbgormkzkuzlrcimsfwyguhakfagnpkxxcdwjthwtlcoaptwqkjrnsvapillluvloerzybyrkjjogmkaedutlhgpcyeayclnurtkwwiojndu</option>';
+            session_id_options_str  += '<option value="wgigykpblsqazxavgtwzqaajxwaygleptwsyarylhyprszhcaxhtzoqzazevxwmnglnkcbtwfqrfbwmeqlyadmpkkaokrppqrvxcgnobmpqqdfbdezyzpxmwfoxtvzxg">wgigykpblsqazxavgtwzqaajxwaygleptwsyarylhyprszhcaxhtzoqzazevxwmnglnkcbtwfqrfbwmeqlyadmpkkaokrppqrvxcgnobmpqqdfbdezyzpxmwfoxtvzxg</option>';
+            session_id_options_str  += '<option value="xjhvqxtncxizvdcezfjchnrpelgntjoeqbqellqooqtzuzsfkqfjrgovmlmzcykaecswfujyiaszzaljjkczkcybucrskggpyzlsdmdzivbkcappstppanffxghkjftw">xjhvqxtncxizvdcezfjchnrpelgntjoeqbqellqooqtzuzsfkqfjrgovmlmzcykaecswfujyiaszzaljjkczkcybucrskggpyzlsdmdzivbkcappstppanffxghkjftw</option>';
+            session_id_options_str  += '<option value="xpgpdljnkecjlrvmtfdxvilgpmkwfjcgjqlipvfgbmddvmnqzdmsbjeqtdxiydvgxwlnuhqkzroidterrfyneexhgkxfwdkwkypqbamshudrwuqotobkqnpsnfzvpadf">xpgpdljnkecjlrvmtfdxvilgpmkwfjcgjqlipvfgbmddvmnqzdmsbjeqtdxiydvgxwlnuhqkzroidterrfyneexhgkxfwdkwkypqbamshudrwuqotobkqnpsnfzvpadf</option>';
+            session_id_options_str  += '<option value="xqxylrtkwukynqkbxxqhnkozwnkwbmstqhsbkcavofbhncprmafmiwjvihmhmxtridcgvgnbgvnkjpnlvnioqajgggdexpbczzewaisssduleiruahmettxfochgnukx">xqxylrtkwukynqkbxxqhnkozwnkwbmstqhsbkcavofbhncprmafmiwjvihmhmxtridcgvgnbgvnkjpnlvnioqajgggdexpbczzewaisssduleiruahmettxfochgnukx</option>';
+            session_id_options_str  += '<option value="xvfeopexnwmlfktjyebjnyuxhraushhvvkmlttmkgadxvzmtmoezgfyiqaophnxfozcmdljaelppzgsvkbbktadbwvbkihapqlbqtmvakgcayezwegivspxgvmhurvgm">xvfeopexnwmlfktjyebjnyuxhraushhvvkmlttmkgadxvzmtmoezgfyiqaophnxfozcmdljaelppzgsvkbbktadbwvbkihapqlbqtmvakgcayezwegivspxgvmhurvgm</option>';
+            session_id_options_str  += '<option value="xzoxfnrbykknpalpqlzgqtfcqthdzopjgzgnjufqmlcjpjufhewalesfvhmzsbmbenohcbdluzwjvjdoboclbivyauvtimtrnqcisrbvatrhxotokuhjlaybwvtbuuuz">xzoxfnrbykknpalpqlzgqtfcqthdzopjgzgnjufqmlcjpjufhewalesfvhmzsbmbenohcbdluzwjvjdoboclbivyauvtimtrnqcisrbvatrhxotokuhjlaybwvtbuuuz</option>';
+            session_id_options_str  += '<option value="yilwyakixxryltiinxgbrhisrfthlxsfleoxyqwsijhkdlmvcibawhpgbbgcpweglesmkkxlcqzyggfqxheybyyibnlkpsssksottvcovsefakhpeodnshftvupzkvza">yilwyakixxryltiinxgbrhisrfthlxsfleoxyqwsijhkdlmvcibawhpgbbgcpweglesmkkxlcqzyggfqxheybyyibnlkpsssksottvcovsefakhpeodnshftvupzkvza</option>';
+            session_id_options_str  += '<option value="ynxmmwotwukqynaesypcfbmhwkrhrrhmwuzusfxnizjtiywfiqbfwlwyjnzbrtodgipiostjckipwcopyljnepsuidwkqlxggygdqavlccopmlevbzxpumqlbjycatfc">ynxmmwotwukqynaesypcfbmhwkrhrrhmwuzusfxnizjtiywfiqbfwlwyjnzbrtodgipiostjckipwcopyljnepsuidwkqlxggygdqavlccopmlevbzxpumqlbjycatfc</option>';
+            session_id_options_str  += '<option value="zuchjerynrnpvxgjvshoypvkgnhqwfrvsieaovipobmdxogogwggsaotgxbahakvocajnomijtgodquhlvgygkumajywmpiohhnsfknynimjewsvaonemdaaibjxlixj">zuchjerynrnpvxgjvshoypvkgnhqwfrvsieaovipobmdxogogwggsaotgxbahakvocajnomijtgodquhlvgygkumajywmpiohhnsfknynimjewsvaonemdaaibjxlixj</option>';
+            sel_session_id.innerHTML = session_id_options_str;
+            div_session_id.appendChild(sel_session_id);
+            var lab_session_id = document.createElement('div');
+            lab_session_id.innerHTML = 'session_id';
+            lab_session_id.className = 'filterlabel';
+            div_session_id.appendChild(lab_session_id);
+            var reset_session_id = document.createElement('div');
+            reset_session_id.innerHTML = 'clear filter';
+            reset_session_id.className = 'filterlabel';
+            reset_session_id.onclick = function() {
+                var options = document.getElementById("sel_session_id").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_session_id.appendChild(reset_session_id);
         resetLabels([layer_Puntidicampionamento_1,layer_Traiettorie_2,layer_Car_4,layer_Bike_5,layer_Walk_6,layer_Car_7,layer_Bike_8,layer_Areacluster_9,layer_Centroidi_10,layer_Punticlusterizzati_11,layer_Areacluster_12,layer_Punticlusterizzati_13,layer_Areacluster_15,layer_Punticlusterizzati_16,layer_Geofenceesistenti_17,layer_Areacluster_18,layer_Punticlusterizzati_19,layer_Geofenceesistenti_20,layer_Areacluster_21,layer_Punticlusterizzati_23,layer_Areacluster_25,layer_Punticlusterizzati_27,layer_Geofenceesistenti_28,layer_Areacluster_29,layer_Punticlusterizzati_31,layer_Geofenceesistenti_32]);
         map.on("zoomend", function(){
             resetLabels([layer_Puntidicampionamento_1,layer_Traiettorie_2,layer_Car_4,layer_Bike_5,layer_Walk_6,layer_Car_7,layer_Bike_8,layer_Areacluster_9,layer_Centroidi_10,layer_Punticlusterizzati_11,layer_Areacluster_12,layer_Punticlusterizzati_13,layer_Areacluster_15,layer_Punticlusterizzati_16,layer_Geofenceesistenti_17,layer_Areacluster_18,layer_Punticlusterizzati_19,layer_Geofenceesistenti_20,layer_Areacluster_21,layer_Punticlusterizzati_23,layer_Areacluster_25,layer_Punticlusterizzati_27,layer_Geofenceesistenti_28,layer_Areacluster_29,layer_Punticlusterizzati_31,layer_Geofenceesistenti_32]);
