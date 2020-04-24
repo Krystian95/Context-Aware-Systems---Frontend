@@ -68,6 +68,8 @@ var json_Punticlusterizzati_19 = {
 { "type": "Feature", "properties": { "id": 1328.0, "cluster_id": 5.0 }, "geometry": { "type": "Point", "coordinates": [ 11.34414, 44.49068 ] } },
 { "type": "Feature", "properties": { "id": 1329.0, "cluster_id": 5.0 }, "geometry": { "type": "Point", "coordinates": [ 11.34414, 44.49139 ] } },
 { "type": "Feature", "properties": { "id": 1330.0, "cluster_id": 8.0 }, "geometry": { "type": "Point", "coordinates": [ 11.34174, 44.49132 ] } },
-{ "type": "Feature", "properties": { "id": 1366.0, "cluster_id": 5.0 }, "geometry": { "type": "Point", "coordinates": [ 11.34341, 44.48979 ] } }
+{ "type": "Feature", "properties": { "id": 1366.0, "cluster_id": 5.0 }, "geometry": { "type": "Point", "coordinates": [ 11.34341, 44.48979 ] } },
+{ "type": "Feature", "properties": { "id": 1377.0, "cluster_id": 1.0 }, "geometry": { "type": "Point", "coordinates": [ 11.32749, 44.49915 ] } },
+{ "type": "Feature", "properties": { "id": 1380.0, "cluster_id": 6.0 }, "geometry": { "type": "Point", "coordinates": [ 11.33492, 44.4984 ] } }
 ]
 }

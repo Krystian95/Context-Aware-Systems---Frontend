@@ -27,6 +27,8 @@ var json_Puntinonclusterizzati_30 = {
 { "type": "Feature", "properties": { "id": 1311.0 }, "geometry": { "type": "Point", "coordinates": [ 11.35443, 44.49405 ] } },
 { "type": "Feature", "properties": { "id": 1315.0 }, "geometry": { "type": "Point", "coordinates": [ 11.34979, 44.49292 ] } },
 { "type": "Feature", "properties": { "id": 1319.0 }, "geometry": { "type": "Point", "coordinates": [ 11.33971, 44.49539 ] } },
-{ "type": "Feature", "properties": { "id": 1330.0 }, "geometry": { "type": "Point", "coordinates": [ 11.34174, 44.49132 ] } }
+{ "type": "Feature", "properties": { "id": 1330.0 }, "geometry": { "type": "Point", "coordinates": [ 11.34174, 44.49132 ] } },
+{ "type": "Feature", "properties": { "id": 1377.0 }, "geometry": { "type": "Point", "coordinates": [ 11.32749, 44.49915 ] } },
+{ "type": "Feature", "properties": { "id": 1380.0 }, "geometry": { "type": "Point", "coordinates": [ 11.33492, 44.4984 ] } }
 ]
 }

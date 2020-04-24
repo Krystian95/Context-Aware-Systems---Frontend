@@ -1,0 +1,8 @@
+Registrare utente con registration_token:f0VgKSkHc0sPkjZh7ao0gk:APA91bFYsPvcZ4MK1wKlVVGlm0PZjfjY-agrVCWaQqQxxI2sVGME8iEx4BcGxI276zTHfy3fAyp8ZYKMm4nr6LfX1PL8br51Yf_TwpLDQ5nDv3QljvbDHZm1YVNoRtIzwWZ8IXgoYk14
+
+Coordinate:
+["44.49915","11.32749"],
+["44.49789","11.331082"],
+["44.49865","11.33267"],
+["44.49840","11.33492"],
+["44.49934","11.33435"]

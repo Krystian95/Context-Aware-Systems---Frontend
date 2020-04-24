@@ -6,13 +6,12 @@
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="shortcut icon" type="image/x-icon" href="../../template/geojoy_icon.PNG" />
+        <link rel="shortcut icon" type="image/x-icon" href="geojoy_icon.PNG" />
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/filter.css">
 <link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
-        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
             html, body{
             width: 100%;
@@ -171,7 +170,7 @@
     <body>
         <div id="header" class="panel panel-primary">
             <div class="panel-header">
-                <h1 align="center"><img src="../../template/geojoy_icon.PNG" alt="icon" width="100" height="100"><br>GeoJoy - Administrator page</h1>
+                <h1 align="center"><img src="C:\Users\andre\AppData\Roaming\QGIS\QGIS3\profiles\default\qgis2web\templates\geojoy_icon.PNG" alt="icon" width="100" height="100"><br>GeoJoy - Administrator page</h1>
                 <h2 align="center">Progetto finale CAS 2019-2020</h2>
                 <p align="center">Lanzarone Lorenzo - Longo Andrea - Romanello Cristian</p>
             </div>
@@ -190,7 +189,6 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-        <script src="js/leaflet-measure.js"></script>
         <script src="js/tailDT.js"></script>
 <script src="js/nouislider.min.js"></script>
 <script src="js/wNumb.js"></script>
@@ -229,22 +227,10 @@
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[44.46957729563106,11.272776309650629],[44.5024327201678,11.33105105315104]]);
+        }).fitBounds([[44.49495059470734,11.326622542512371],[44.503162613148426,11.33921114596868]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
-        var measureControl = new L.Control.Measure({
-            position: 'topleft',
-            primaryLengthUnit: 'meters',
-            secondaryLengthUnit: 'kilometers',
-            primaryAreaUnit: 'sqmeters',
-            secondaryAreaUnit: 'hectares'
-        });
-        measureControl.addTo(map);
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
-        .innerHTML = '';
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
-        .className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
